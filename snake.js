@@ -143,8 +143,7 @@ class SnakeGame {
 class Snake {
 
     static STARTING_EDGE_OFFSET = 20;
-    position = {} 
-    tail = [];
+    tail = []; // position
     tailLength = 6;
     direction = 'up';
     speed = 160;
@@ -167,11 +166,18 @@ class Snake {
         const y = Math.floor(Math.random() * (SnakeGame.NUM_ROWS - Snake.STARTING_EDGE_OFFSET)) + (Snake.STARTING_EDGE_OFFSET / 2);
         this.position = { x, y };
         console.log(this.position)
+
         const startCell = this.game.boardCells[y][x];
+        const body1Cell = this.game.boardCells[y][x - 1];
+        const body2Cell = this.game.boardCells[y][x - 2];
+        const endCell = this.game.boardCells[y][x - 3];
+
         startCell.classList.add('snake');
+        body1Cell.classList.add('snake');
+        body2Cell.classList.add('snake');
+        endCell.classList.add('snake');
 
-        this.tail.push(startCell);
-
+        this.tail.push(startCell, body1Cell, body2Cell, endCell);
     }
 
     /**
@@ -186,7 +192,8 @@ class Snake {
         }
 
         // Todo: add the snake moving logic here and check if the snake hits a wall, itself, or food
-        
+        tail.pop();
+
         // Move another step in `this.speed` number of milliseconds
         this.movementTimer = setTimeout(() => { this.move(); }, this.speed);
 
