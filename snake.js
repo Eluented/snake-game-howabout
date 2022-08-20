@@ -176,7 +176,7 @@ class Snake {
         body2Cell.classList.add('snake');
         endCell.classList.add('snake');
 
-        this.tail.push(`${y}-${x}`, `${y}-${(x-1)}`, `${y}-${(x-2)}`, `${y}-${(x-3)}`);
+        this.tail.push(startCell, body1Cell, body2Cell, endCell);
     }
 
     /**
@@ -191,7 +191,6 @@ class Snake {
         }
 
         // Todo: add the snake moving logic here and check if the snake hits a wall, itself, or food
-        tail.pop();
 
         // Move another step in `this.speed` number of milliseconds
         this.movementTimer = setTimeout(() => { this.move(); }, this.speed);
@@ -202,8 +201,13 @@ class Snake {
      * Set the snake's direction
      */
     setDirection(direction) {
-        this.direction = direction
+        this.direction = direction;
 
+        var lastCell = this.tail.pop();
+
+        lastCell.classList.remove('snake');
+
+        console.log(this.tail)
         if (direction == 'left'){
             // do something
         }
