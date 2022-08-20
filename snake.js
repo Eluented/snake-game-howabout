@@ -18,7 +18,7 @@ class SnakeGame {
 
         this.snake = new Snake(this);
         this.food = new Food(this);
-
+        console.log(this.boardCells)
         window.addEventListener('keydown', (event) => {
             switch (event.key) {
                 case 'ArrowLeft':
@@ -154,9 +154,8 @@ class Snake {
         this.game = game;
 
         this.init();
-
+        console.log(this.tail)
     }
-
     /**
      * Place the snake initially
      */
@@ -177,7 +176,7 @@ class Snake {
         body2Cell.classList.add('snake');
         endCell.classList.add('snake');
 
-        this.tail.push(startCell, body1Cell, body2Cell, endCell);
+        this.tail.push(`${y}-${x}`, `${y}-${(x-1)}`, `${y}-${(x-2)}`, `${y}-${(x-3)}`);
     }
 
     /**
