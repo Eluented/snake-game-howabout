@@ -44,6 +44,7 @@ class SnakeGame {
                 case 'Escape':
                     this.snake.pause();
                     break;
+                // add shift case and make snake go faster
             }
         });
 
@@ -97,10 +98,9 @@ class SnakeGame {
     play() {
 
         this.controls.classList.add('playing');
-
+        this.moving = true
         this.snake.move();
         this.food.move();
-
     }
 
     /**
@@ -143,7 +143,7 @@ class SnakeGame {
 class Snake {
 
     static STARTING_EDGE_OFFSET = 20;
-
+    position = {} 
     tail = [];
     tailLength = 6;
     direction = 'up';
@@ -166,7 +166,7 @@ class Snake {
         const x = Math.floor(Math.random() * (SnakeGame.NUM_COLS - Snake.STARTING_EDGE_OFFSET)) + (Snake.STARTING_EDGE_OFFSET / 2);
         const y = Math.floor(Math.random() * (SnakeGame.NUM_ROWS - Snake.STARTING_EDGE_OFFSET)) + (Snake.STARTING_EDGE_OFFSET / 2);
         this.position = { x, y };
-
+        console.log(this.position)
         const startCell = this.game.boardCells[y][x];
         startCell.classList.add('snake');
 
@@ -186,7 +186,7 @@ class Snake {
         }
 
         // Todo: add the snake moving logic here and check if the snake hits a wall, itself, or food
-
+        
         // Move another step in `this.speed` number of milliseconds
         this.movementTimer = setTimeout(() => { this.move(); }, this.speed);
 
@@ -196,9 +196,20 @@ class Snake {
      * Set the snake's direction
      */
     setDirection(direction) {
+        this.direction = direction
 
-        // Todo: update the snake's direction here
-
+        if (direction == 'left'){
+            // do something
+        }
+        if (direction == 'right') {
+            // do something 
+        }
+        if (direction == 'up') {
+            // do something
+        }
+        if (direction == 'down') {
+            // do something 
+        }
     }
 
     /**
@@ -242,8 +253,8 @@ class Food {
      * Place the food randomly on the board, by adding the class 'food' to one of the cells
      */
     move() {
-
         // Todo: write this
+
 
     }
 

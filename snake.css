@@ -33,9 +33,10 @@ div.row {
     display: flex;
     flex-direction: row;
 }
-div.col {
+div[class*='col'] {
     flex: 1;
     height: 100%;
+    border: 1px solid grey;
 }
 div.col.snake {
     background: #000 !important;
