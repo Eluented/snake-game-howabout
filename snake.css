@@ -33,7 +33,7 @@ div.row {
     display: flex;
     flex-direction: row;
 }
-div[class*='col'] {
+div.col {
     flex: 1;
     height: 100%;
     border: 1px solid grey;

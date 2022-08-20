@@ -207,9 +207,16 @@ class Snake {
 
         lastCell.classList.remove('snake');
 
+        // position of the head 
+        var head = this.tail[0]
+
         console.log(this.tail)
         if (direction == 'left'){
-            // do something
+            // regex to find colNumber and replaces it to go left
+            let colNumber= head.classList[1].split(/(\d+)/)[1]
+
+            head.classList.replace(head.classList[1], `col-${colNumber-1}`)
+            console.log(head)
         }
         if (direction == 'right') {
             // do something 
@@ -220,6 +227,11 @@ class Snake {
         if (direction == 'down') {
             // do something 
         }
+
+        this.tail.unshift(head)
+        head.classList.add('snake');
+        
+        console.log('this is head', head, 'this is tail list', this.tail)
     }
 
     /**
