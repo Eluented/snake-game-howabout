@@ -201,12 +201,16 @@ class Snake {
     setDirection(direction) {
         this.direction = direction;
 
-        let lastCell = this.tail.pop();
+        // removes the last cell of the snake when it moves
+        let lastCellCoordinates = this.position.pop().split('-');
 
-        lastCell.classList.remove('snake');
+        let lastY = parseInt(lastCellCoordinates[0]);
+        let lastX = parseInt(lastCellCoordinates[1]);
+
+        this.game.boardCells[lastY][lastX].classList.remove('snake')
 
         // DOM position of the head 
-        let head = this.tail[0]
+        // let head = this.tail[0]
 
         // number coordinates of the head 
         let coordinates = this.position[0].split('-');
