@@ -154,7 +154,6 @@ class Snake {
         this.game = game;
 
         this.init();
-        console.log(this.tail)
     }
     /**
      * Place the snake initially
@@ -165,7 +164,6 @@ class Snake {
         const y = Math.floor(Math.random() * (SnakeGame.NUM_ROWS - Snake.STARTING_EDGE_OFFSET)) + (Snake.STARTING_EDGE_OFFSET / 2);
         this.position =  [`${y}-${x}`, `${y}-${x-1}`, `${y}-${x-2}`, `${y}-${x-3}`];
         console.log(this.position)
-
         const startCell = this.game.boardCells[y][x];
         const body1Cell = this.game.boardCells[y][x - 1];
         const body2Cell = this.game.boardCells[y][x - 2];
@@ -203,41 +201,48 @@ class Snake {
     setDirection(direction) {
         this.direction = direction;
 
-        var lastCell = this.tail.pop();
+        let lastCell = this.tail.pop();
 
         lastCell.classList.remove('snake');
 
-        // position of the head 
-        var head = this.tail[0]
+        // DOM position of the head 
+        let head = this.tail[0]
 
-        console.log(this.tail)
+        // number coordinates of the head 
+        let coordinates = this.position[0].split('-');
+        console.log(coordinates)
+
+        let y = parseInt(coordinates[0]);
+        let x = parseInt(coordinates[1]);
+
         if (direction == 'left') {
+            x = x - 1;
             // regex to find colNumber and replaces it to go left
-            let colNumber = head.classList[1].split(/(\d+)/)[1]
+            // let colNumber = head.classList[1].split(/(\d+)/)[1]
 
-            head.classList.replace(head.classList[1], `col-${parseInt(colNumber) - 1}`)
+            // head.classList.replace(head.classList[1], `col-${parseInt(colNumber) - 1}`)
         }
         if (direction == 'right') {
-            let colNumber = head.classList[1].split(/(\d+)/)[1]
-
-            head.classList.replace(head.classList[1], `col-${parseInt(colNumber) + 1}`)
+            x = x + 1;
+            // let colNumber = head.classList[1].split(/(\d+)/)[1]
+            // head.classList.replace(head.classList[1], `col-${parseInt(colNumber) + 1}`)
         }
         if (direction == 'up') {
-            // do something
+            y = y - 1;
+            console.log('this is y', y)
         }
         if (direction == 'down') {
-            // do something 
+            y = y + 1;
         }
+        let newCoordinates = y + '-' + x;
+        this.position.unshift(newCoordinates)
 
-        this.tail.unshift(head)
-
-        this.game.
-        console.log(head.classList[1])
-
+        this.game.boardCells[y][x].classList.add('snake');
+        console.log(this.position)
+        // tried to make it work but couldn't access which row it is in so I decided to use coordinates
         // document.querySelector(`.${head.classList[1]}`).classList.add('snake')
-
-
-        // console.log('this is head', head, 'this is tail list', this.tail)
+        // head.classList.add('snake)
+        // this.tail.unshift(head)
     }
 
     /**
