@@ -142,12 +142,13 @@ class SnakeGame {
 class Snake {
 
     static STARTING_EDGE_OFFSET = 20;
-    tail = []; 
+    tail = [];
     position = [];
     tailLength = 6;
     direction = 'up';
     speed = 160;
     moving = false;
+    movementTimer = null;
 
     constructor(game) {
 
@@ -162,7 +163,7 @@ class Snake {
 
         const x = Math.floor(Math.random() * (SnakeGame.NUM_COLS - Snake.STARTING_EDGE_OFFSET)) + (Snake.STARTING_EDGE_OFFSET / 2);
         const y = Math.floor(Math.random() * (SnakeGame.NUM_ROWS - Snake.STARTING_EDGE_OFFSET)) + (Snake.STARTING_EDGE_OFFSET / 2);
-        this.position =  [`${y}-${x}`, `${y}-${x-1}`, `${y}-${x-2}`, `${y}-${x-3}`];
+        this.position = [`${y}-${x}`, `${y}-${x - 1}`, `${y}-${x - 2}`, `${y}-${x - 3}`];
         console.log(this.position)
         const startCell = this.game.boardCells[y][x];
         const body1Cell = this.game.boardCells[y][x - 1];
@@ -180,7 +181,7 @@ class Snake {
     /**
      * Move the snake
      */
-    move() {
+    move(direction) {
 
         // If this is the first move, make sure the game isn't paused
         if (!this.moving) {
@@ -189,28 +190,13 @@ class Snake {
         }
 
         // Todo: add the snake moving logic here and check if the snake hits a wall, itself, or food
-
-        // Move another step in `this.speed` number of milliseconds
-        this.movementTimer = setTimeout(() => { this.move(); }, this.speed);
-
-    }
-
-    /**
-     * Set the snake's direction
-     */
-    setDirection(direction) {
-        this.direction = direction;
-
-        // removes the last cell of the snake when it moves
         let lastCellCoordinates = this.position.pop().split('-');
 
         let lastY = parseInt(lastCellCoordinates[0]);
         let lastX = parseInt(lastCellCoordinates[1]);
 
-        this.game.boardCells[lastY][lastX].classList.remove('snake')
+        this.game.boardCells[lastY][lastX].classList.remove('snake');
 
-        // DOM position of the head 
-        // let head = this.tail[0]
 
         // number coordinates of the head 
         let coordinates = this.position[0].split('-');
@@ -221,32 +207,47 @@ class Snake {
 
         if (direction == 'left') {
             x = x - 1;
-            // regex to find colNumber and replaces it to go left
-            // let colNumber = head.classList[1].split(/(\d+)/)[1]
-
-            // head.classList.replace(head.classList[1], `col-${parseInt(colNumber) - 1}`)
         }
         if (direction == 'right') {
             x = x + 1;
-            // let colNumber = head.classList[1].split(/(\d+)/)[1]
-            // head.classList.replace(head.classList[1], `col-${parseInt(colNumber) + 1}`)
         }
         if (direction == 'up') {
             y = y - 1;
-            console.log('this is y', y)
         }
         if (direction == 'down') {
             y = y + 1;
         }
+
         let newCoordinates = y + '-' + x;
         this.position.unshift(newCoordinates)
 
         this.game.boardCells[y][x].classList.add('snake');
-        console.log(this.position)
-        // tried to make it work but couldn't access which row it is in so I decided to use coordinates
-        // document.querySelector(`.${head.classList[1]}`).classList.add('snake')
-        // head.classList.add('snake)
-        // this.tail.unshift(head)
+
+        // Move another step in `this.speed` number of milliseconds
+        if (this.moving) {
+            this.movementTimer = setTimeout(() => { this.move(this.direction) }, this.speed);
+        }
+
+    }
+
+    /**
+     * Set the snake's direction
+     */
+    setDirection(direction) {
+        this.direction = direction;
+
+        if (direction == 'left') {
+            this.direction = 'left'
+        }
+        if (direction == 'right') {
+            this.direction = 'right'
+        }
+        if (direction == 'up') {
+            this.direction = 'up'
+        }
+        if (direction == 'down') {
+            this.direction = 'down'
+        }
     }
 
     /**
