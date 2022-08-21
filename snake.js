@@ -18,7 +18,6 @@ class SnakeGame {
 
         this.snake = new Snake(this);
         this.food = new Food(this);
-        console.log(this.boardCells)
         window.addEventListener('keydown', (event) => {
             switch (event.key) {
                 case 'ArrowLeft':
@@ -143,7 +142,8 @@ class SnakeGame {
 class Snake {
 
     static STARTING_EDGE_OFFSET = 20;
-    tail = []; // position
+    tail = []; 
+    position = [];
     tailLength = 6;
     direction = 'up';
     speed = 160;
@@ -163,7 +163,7 @@ class Snake {
 
         const x = Math.floor(Math.random() * (SnakeGame.NUM_COLS - Snake.STARTING_EDGE_OFFSET)) + (Snake.STARTING_EDGE_OFFSET / 2);
         const y = Math.floor(Math.random() * (SnakeGame.NUM_ROWS - Snake.STARTING_EDGE_OFFSET)) + (Snake.STARTING_EDGE_OFFSET / 2);
-        this.position = { x, y };
+        this.position =  [`${y}-${x}`, `${y}-${x-1}`, `${y}-${x-2}`, `${y}-${x-3}`];
         console.log(this.position)
 
         const startCell = this.game.boardCells[y][x];
@@ -211,15 +211,16 @@ class Snake {
         var head = this.tail[0]
 
         console.log(this.tail)
-        if (direction == 'left'){
+        if (direction == 'left') {
             // regex to find colNumber and replaces it to go left
-            let colNumber= head.classList[1].split(/(\d+)/)[1]
+            let colNumber = head.classList[1].split(/(\d+)/)[1]
 
-            head.classList.replace(head.classList[1], `col-${colNumber-1}`)
-            console.log(head)
+            head.classList.replace(head.classList[1], `col-${parseInt(colNumber) - 1}`)
         }
         if (direction == 'right') {
-            // do something 
+            let colNumber = head.classList[1].split(/(\d+)/)[1]
+
+            head.classList.replace(head.classList[1], `col-${parseInt(colNumber) + 1}`)
         }
         if (direction == 'up') {
             // do something
@@ -229,9 +230,14 @@ class Snake {
         }
 
         this.tail.unshift(head)
-        head.classList.add('snake');
-        
-        console.log('this is head', head, 'this is tail list', this.tail)
+
+        this.game.
+        console.log(head.classList[1])
+
+        // document.querySelector(`.${head.classList[1]}`).classList.add('snake')
+
+
+        // console.log('this is head', head, 'this is tail list', this.tail)
     }
 
     /**
