@@ -1,7 +1,8 @@
 class SnakeGame {
 
-    static NUM_ROWS = 60;
-    static NUM_COLS = 120;
+
+    static NUM_ROWS = Math.ceil(window.screen.availHeight / 15);
+    static NUM_COLS = Math.ceil(window.screen.availWidth / 15);
 
     boardCells = [];
     score = 0;
@@ -88,6 +89,26 @@ class SnakeGame {
 
         }
 
+        // adding wall colours
+        document.querySelectorAll('div.row-0')
+        .forEach(el => {
+            el.style.background = '#B20600'
+        })
+
+        document.querySelectorAll('div.col-0')
+        .forEach(el => {
+            el.style.background = '#B20600'
+        })
+
+        document.querySelectorAll(`div.row-${SnakeGame.NUM_ROWS - 1}`)
+        .forEach(el => {
+            el.style.background = '#B20600'
+        })
+
+        document.querySelectorAll(`.col-${SnakeGame.NUM_COLS - 1}`)
+        .forEach(el => {
+            el.style.background = '#B20600'
+        })
     }
 
     /**
@@ -160,7 +181,6 @@ class Snake {
      * Place the snake initially
      */
     init() {
-
         const x = Math.floor(Math.random() * (SnakeGame.NUM_COLS - Snake.STARTING_EDGE_OFFSET)) + (Snake.STARTING_EDGE_OFFSET / 2);
         const y = Math.floor(Math.random() * (SnakeGame.NUM_ROWS - Snake.STARTING_EDGE_OFFSET)) + (Snake.STARTING_EDGE_OFFSET / 2);
         this.head = `${y}-${x}`
@@ -248,7 +268,7 @@ class Snake {
         }
 
         // checks if hits wall
-        if (x > 118 || x < 1 || y > 59 || y < 1) {
+        if (x > SnakeGame.NUM_COLS - 2 || x < 1 || y > SnakeGame.NUM_ROWS - 2 || y < 1) {
             console.log(x, y)
             this.game.gameOver()
         }

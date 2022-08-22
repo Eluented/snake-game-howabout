@@ -47,15 +47,14 @@ div.row {
 }
 div.col {
     flex: 1;
-    height: 100%;
-    border: 1px solid grey;
+    /* border: 1px solid grey; */
 }
 div.col.snake {
     background: #FF1E00 !important;
 }
 
 div.col.food {
-    border-radius: 35% 35% 41% 41% / 42% 42% 75% 75%;
+    border-radius: 50%;
 }
 
 div#gameOver {
@@ -73,6 +72,6 @@ div#gameOver {
     display: block;
 }
 
-.row-0, .col-0, .row-59, .col-119 {
-    background: #251D3A;
-}
+/* .row-0, .col-0, .row-59, .col-119 {
+    background: #ac0909;
+} */
