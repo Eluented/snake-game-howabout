@@ -73,3 +73,6 @@ div#gameOver {
     display: block;
 }
 
+.row-0, .col-0, .row-59, .col-119 {
+    background: #251D3A;
+}

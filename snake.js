@@ -210,11 +210,11 @@ class Snake {
         this.game.boardCells[lastY][lastX].classList.remove('snake');
 
         // store position of head before change
-        let oldHead = this.head 
+        let oldHead = this.head
 
         // coordinates of snake head 
         let head = this.head.split('-');
-        
+
         let y = parseInt(head[0]);
         let x = parseInt(head[1]);
 
@@ -239,16 +239,18 @@ class Snake {
 
         this.game.boardCells[y][x].classList.add('snake');
 
-        // checks if hits wall
-
         // check if it hitself
-
         for (let i = 1; i < this.tail.length; i++) {
-            console.log(this.tail[i], this.head)
 
             if (this.head === this.tail[i]) {
                 this.game.gameOver();
             }
+        }
+
+        // checks if hits wall
+        if (x > 118 || x < 1 || y > 59 || y < 1) {
+            console.log(x, y)
+            this.game.gameOver()
         }
 
         // Move another step in `this.speed` number of milliseconds
