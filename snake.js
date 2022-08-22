@@ -129,7 +129,7 @@ class SnakeGame {
     async gameOver() {
 
         this.snake.pause();
-
+        // send user data to api
         this.controls.classList.remove('playing');
         this.controls.classList.add('game-over');
         this.board.classList.add('game-over');
@@ -197,12 +197,11 @@ class Snake {
         this.game.boardCells[lastY][lastX].classList.remove('snake');
 
 
-        // number coordinates of the head 
-        let coordinates = this.position[0].split('-');
-        console.log(coordinates)
+        // coordinates of snake head 
+        let headCoordinates = this.position[0].split('-');
 
-        let y = parseInt(coordinates[0]);
-        let x = parseInt(coordinates[1]);
+        let y = parseInt(headCoordinates[0]);
+        let x = parseInt(headCoordinates[1]);
 
         if (direction == 'left') {
             x = x - 1;
@@ -223,7 +222,18 @@ class Snake {
         this.game.boardCells[y][x].classList.add('snake');
 
         // checks if hits wall
-        
+
+        // check if it hitself
+
+        for (let i = 0; i < this.position.length; i++) {
+            console.log(this.position[0], this.position[i])
+
+            console.log(newCoordinates, this.position[i])
+            if (newCoordinates === this.position[i]) {
+                this.game.gameOver();
+            }
+        }
+
         // Move another step in `this.speed` number of milliseconds
         if (this.moving) {
             this.movementTimer = setTimeout(() => { this.move(this.direction) }, this.speed);
