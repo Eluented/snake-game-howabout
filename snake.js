@@ -1,4 +1,3 @@
-
 class SnakeGame {
 
     static NUM_ROWS = 60;
@@ -145,7 +144,7 @@ class Snake {
     tail = [];
     position = [];
     tailLength = 6;
-    direction = 'up';
+    direction = 'right';
     speed = 160;
     moving = false;
     movementTimer = null;
@@ -223,6 +222,8 @@ class Snake {
 
         this.game.boardCells[y][x].classList.add('snake');
 
+        // checks if hits wall
+        
         // Move another step in `this.speed` number of milliseconds
         if (this.moving) {
             this.movementTimer = setTimeout(() => { this.move(this.direction) }, this.speed);
@@ -282,9 +283,8 @@ class Snake {
 class Food {
 
     constructor(game) {
-
         this.game = game;
-
+        this.color = `hsl(${Math.floor(Math.random() * 360)},100%,50%)`;
     }
 
     /**
@@ -292,7 +292,13 @@ class Food {
      */
     move() {
         // Todo: write this
+        const foodX = Math.floor(Math.random() * (SnakeGame.NUM_COLS - Snake.STARTING_EDGE_OFFSET)) + (Snake.STARTING_EDGE_OFFSET / 2);
+        const foodY = Math.floor(Math.random() * (SnakeGame.NUM_ROWS - Snake.STARTING_EDGE_OFFSET)) + (Snake.STARTING_EDGE_OFFSET / 2);
 
+        const foodCell = this.game.boardCells[foodY][foodX];
+
+        foodCell.classList.add('food');
+        document.querySelector('.food').style.backgroundColor = this.color;
 
     }
 
