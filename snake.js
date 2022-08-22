@@ -3,7 +3,7 @@ class SnakeGame {
 
     static NUM_ROWS = Math.ceil(window.screen.availHeight / 20);
     static NUM_COLS = Math.ceil(window.screen.availWidth / 20);
-    
+
 
     boardCells = [];
     score = 0;
@@ -93,24 +93,24 @@ class SnakeGame {
 
         // adding wall colours
         document.querySelectorAll('div.row-0')
-        .forEach(el => {
-            el.style.background = '#B20600'
-        })
+            .forEach(el => {
+                el.style.background = '#B20600'
+            })
 
         document.querySelectorAll('div.col-0')
-        .forEach(el => {
-            el.style.background = '#B20600'
-        })
+            .forEach(el => {
+                el.style.background = '#B20600'
+            })
 
         document.querySelectorAll(`div.row-${SnakeGame.NUM_ROWS - 1}`)
-        .forEach(el => {
-            el.style.background = '#B20600'
-        })
+            .forEach(el => {
+                el.style.background = '#B20600'
+            })
 
         document.querySelectorAll(`.col-${SnakeGame.NUM_COLS - 1}`)
-        .forEach(el => {
-            el.style.background = '#B20600'
-        })
+            .forEach(el => {
+                el.style.background = '#B20600'
+            })
     }
 
     /**
@@ -122,6 +122,9 @@ class SnakeGame {
         this.moving = true
         this.snake.move();
         new Food(this).move();
+
+        var playAudio = new Audio('./assets/audio/mlg-airhorn.mp3');
+        playAudio.play();
     }
 
     /**
@@ -150,6 +153,8 @@ class SnakeGame {
      * End the game
      */
     async gameOver() {
+        var gameOverAudio = new Audio('./assets/audio/snake-dies-metal-gear.mp3');
+        gameOverAudio.play();
 
         this.snake.pause();
         // send user data to api
@@ -266,11 +271,14 @@ class Snake {
 
         //  checks if it eats food
         if (this.head === this.game.food) {
+            var foodAudio = new Audio('./assets/audio/food.mp3');
+            foodAudio.play();
+
             let foodCoords = this.game.food.split('-');
 
             let foodY = foodCoords[0];
             let foodX = foodCoords[1];
-            
+
             // remove random colour then remove class 
             document.querySelector('.food').style.backgroundColor = '#E8F9FD';
             this.game.boardCells[foodY][foodX].classList.remove('food');
@@ -280,10 +288,10 @@ class Snake {
             this.game.boardCells[y][x].classList.add('snake');
 
             // spawn new Food
-            new Food(this.game).move();   
-            
+            new Food(this.game).move();
+
             this.game.increaseScore(5);
-            this.speed -= 3;
+            this.speed -= 2;
         }
 
         // Move another step in `this.speed` number of milliseconds
