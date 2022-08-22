@@ -3,9 +3,11 @@ class SnakeGame {
 
     static NUM_ROWS = Math.ceil(window.screen.availHeight / 15);
     static NUM_COLS = Math.ceil(window.screen.availWidth / 15);
+    
 
     boardCells = [];
     score = 0;
+    food = null;
 
     constructor(board, controls) {
 
@@ -18,6 +20,7 @@ class SnakeGame {
 
         this.snake = new Snake(this);
         this.food = new Food(this);
+
         window.addEventListener('keydown', (event) => {
             switch (event.key) {
                 case 'ArrowLeft':
@@ -197,17 +200,6 @@ class Snake {
 
             this.game.boardCells[y][x].classList.add('snake');
         }
-
-        // const body1Cell = this.game.boardCells[y][x - 1];
-        // const body2Cell = this.game.boardCells[y][x - 2];
-        // const endCell = this.game.boardCells[y][x - 3];
-
-
-        // body1Cell.classList.add('snake');
-        // body2Cell.classList.add('snake');
-        // endCell.classList.add('snake');
-
-        // this.tail.push(startCell, body1Cell, body2Cell, endCell);
     }
 
     /**
@@ -222,10 +214,11 @@ class Snake {
         }
 
         // Todo: add the snake moving logic here and check if the snake hits a wall, itself, or food
-        let lastCellCoordinates = this.tail.pop().split('-');
+        let lastCellCoordinates = this.tail.pop()
+        let lastCellSplit = lastCellCoordinates.split('-');
 
-        let lastY = parseInt(lastCellCoordinates[0]);
-        let lastX = parseInt(lastCellCoordinates[1]);
+        let lastY = parseInt(lastCellSplit[0]);
+        let lastX = parseInt(lastCellSplit[1]);
 
         this.game.boardCells[lastY][lastX].classList.remove('snake');
 
@@ -269,8 +262,28 @@ class Snake {
 
         // checks if hits wall
         if (x > SnakeGame.NUM_COLS - 2 || x < 1 || y > SnakeGame.NUM_ROWS - 2 || y < 1) {
-            console.log(x, y)
-            this.game.gameOver()
+            this.game.gameOver();
+        }
+
+        //  checks if it eats food
+        if (this.head === this.game.food) {
+            let foodCoords = this.game.food.split('-');
+
+            let foodY = foodCoords[0];
+            let foodX = foodCoords[1];
+            
+            // remove random colour then remove class 
+            document.querySelector('.food').style.backgroundColor = '#E8F9FD';
+            this.game.boardCells[foodY][foodX].classList.remove('food');
+
+            // push the popped tail back into the snake
+            this.tail.push(lastCellCoordinates);
+            this.game.boardCells[y][x].classList.add('snake');
+
+            // spawn new Food
+            new Food(this.game).move();   
+            
+            this.game.increaseScore(5);
         }
 
         // Move another step in `this.speed` number of milliseconds
@@ -332,7 +345,7 @@ class Snake {
 class Food {
 
     constructor(game) {
-        this.game = game;
+        this.game = game
         this.color = `hsl(${Math.floor(Math.random() * 360)},100%,50%)`;
     }
 
@@ -345,6 +358,7 @@ class Food {
         const foodY = Math.floor(Math.random() * (SnakeGame.NUM_ROWS - Snake.STARTING_EDGE_OFFSET)) + (Snake.STARTING_EDGE_OFFSET / 2);
 
         const foodCell = this.game.boardCells[foodY][foodX];
+        this.game.food = foodY + '-' + foodX;
 
         foodCell.classList.add('food');
         document.querySelector('.food').style.backgroundColor = this.color;
