@@ -1,8 +1,8 @@
 class SnakeGame {
 
 
-    static NUM_ROWS = Math.ceil(window.screen.availHeight / 15);
-    static NUM_COLS = Math.ceil(window.screen.availWidth / 15);
+    static NUM_ROWS = Math.ceil(window.screen.availHeight / 20);
+    static NUM_COLS = Math.ceil(window.screen.availWidth / 20);
     
 
     boardCells = [];
@@ -19,7 +19,6 @@ class SnakeGame {
         this.initBoard();
 
         this.snake = new Snake(this);
-        this.food = new Food(this);
 
         window.addEventListener('keydown', (event) => {
             switch (event.key) {
@@ -122,7 +121,7 @@ class SnakeGame {
         this.controls.classList.add('playing');
         this.moving = true
         this.snake.move();
-        this.food.move();
+        new Food(this).move();
     }
 
     /**
@@ -284,6 +283,7 @@ class Snake {
             new Food(this.game).move();   
             
             this.game.increaseScore(5);
+            this.speed -= 3;
         }
 
         // Move another step in `this.speed` number of milliseconds
@@ -328,11 +328,16 @@ class Snake {
     reset() {
 
         for (let i = 0; i < this.tail.length; i++) {
-            this.tail[i].classList.remove('snake');
+            let yX = this.tail[i].split('-');
+
+            let y = yX[0];
+            let x = yX[1];
+
+            this.game.boardCells[y][x].classList.remove('snake')
         }
         this.tail.length = 0;
         this.tailLength = 6;
-        this.direction = 'up';
+        this.direction = 'right';
         this.speed = 160;
         this.moving = false;
 

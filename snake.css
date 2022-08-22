@@ -11,7 +11,7 @@ body {
 }
 
 #board {
-    background-color: #E8F9FD;
+    background-color: #fffcfc;
 }
 
 #controls.playing .play-button, #controls.game-over .play-button {
