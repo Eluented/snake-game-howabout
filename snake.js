@@ -156,6 +156,7 @@ class SnakeGame {
         var gameOverAudio = new Audio('./assets/audio/snake-dies-metal-gear.mp3');
         gameOverAudio.play();
 
+        this.score = 0;
         this.snake.pause();
         // send user data to api
         this.controls.classList.remove('playing');
@@ -280,7 +281,7 @@ class Snake {
             let foodX = foodCoords[1];
 
             // remove random colour then remove class 
-            document.querySelector('.food').style.backgroundColor = '#E8F9FD';
+            document.querySelector('.food').style.backgroundColor = '#fffcfc';
             this.game.boardCells[foodY][foodX].classList.remove('food');
 
             // push the popped tail back into the snake
