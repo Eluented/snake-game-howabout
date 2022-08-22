@@ -141,6 +141,7 @@ class SnakeGame {
 class Snake {
 
     static STARTING_EDGE_OFFSET = 20;
+    head = null;
     tail = [];
     position = [];
     tailLength = 6;
@@ -162,19 +163,31 @@ class Snake {
 
         const x = Math.floor(Math.random() * (SnakeGame.NUM_COLS - Snake.STARTING_EDGE_OFFSET)) + (Snake.STARTING_EDGE_OFFSET / 2);
         const y = Math.floor(Math.random() * (SnakeGame.NUM_ROWS - Snake.STARTING_EDGE_OFFSET)) + (Snake.STARTING_EDGE_OFFSET / 2);
-        this.position = [`${y}-${x}`, `${y}-${x - 1}`, `${y}-${x - 2}`, `${y}-${x - 3}`];
+        this.head = `${y}-${x}`
+        this.tail = [`${y}-${x - 1}`, `${y}-${x - 2}`, `${y}-${x - 3}`, `${y}-${x - 4}`, `${y}-${x - 5}`];
         console.log(this.position)
-        const startCell = this.game.boardCells[y][x];
-        const body1Cell = this.game.boardCells[y][x - 1];
-        const body2Cell = this.game.boardCells[y][x - 2];
-        const endCell = this.game.boardCells[y][x - 3];
 
-        startCell.classList.add('snake');
-        body1Cell.classList.add('snake');
-        body2Cell.classList.add('snake');
-        endCell.classList.add('snake');
+        const headCell = this.game.boardCells[y][x];
+        headCell.classList.add('snake');
 
-        this.tail.push(startCell, body1Cell, body2Cell, endCell);
+        for (let i = 0; i < this.tail.length; i++) {
+            let yX = this.tail[i].split('-');
+            let y = yX[0]
+            let x = yX[1]
+
+            this.game.boardCells[y][x].classList.add('snake');
+        }
+
+        // const body1Cell = this.game.boardCells[y][x - 1];
+        // const body2Cell = this.game.boardCells[y][x - 2];
+        // const endCell = this.game.boardCells[y][x - 3];
+
+
+        // body1Cell.classList.add('snake');
+        // body2Cell.classList.add('snake');
+        // endCell.classList.add('snake');
+
+        // this.tail.push(startCell, body1Cell, body2Cell, endCell);
     }
 
     /**
@@ -189,19 +202,21 @@ class Snake {
         }
 
         // Todo: add the snake moving logic here and check if the snake hits a wall, itself, or food
-        let lastCellCoordinates = this.position.pop().split('-');
+        let lastCellCoordinates = this.tail.pop().split('-');
 
         let lastY = parseInt(lastCellCoordinates[0]);
         let lastX = parseInt(lastCellCoordinates[1]);
 
         this.game.boardCells[lastY][lastX].classList.remove('snake');
 
+        // store position of head before change
+        let oldHead = this.head 
 
         // coordinates of snake head 
-        let headCoordinates = this.position[0].split('-');
-
-        let y = parseInt(headCoordinates[0]);
-        let x = parseInt(headCoordinates[1]);
+        let head = this.head.split('-');
+        
+        let y = parseInt(head[0]);
+        let x = parseInt(head[1]);
 
         if (direction == 'left') {
             x = x - 1;
@@ -217,7 +232,10 @@ class Snake {
         }
 
         let newCoordinates = y + '-' + x;
-        this.position.unshift(newCoordinates)
+        this.head = newCoordinates
+
+        // unshifts old position of head into tail
+        this.tail.unshift(oldHead)
 
         this.game.boardCells[y][x].classList.add('snake');
 
@@ -225,11 +243,10 @@ class Snake {
 
         // check if it hitself
 
-        for (let i = 0; i < this.position.length; i++) {
-            console.log(this.position[0], this.position[i])
+        for (let i = 1; i < this.tail.length; i++) {
+            console.log(this.tail[i], this.head)
 
-            console.log(newCoordinates, this.position[i])
-            if (newCoordinates === this.position[i]) {
+            if (this.head === this.tail[i]) {
                 this.game.gameOver();
             }
         }
