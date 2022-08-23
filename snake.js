@@ -335,15 +335,21 @@ class Snake {
      * Reset the snake back to the initial defaults
      */
     reset() {
+        // removes last game's snake cells 
+        document.querySelectorAll('div.snake')
+            .forEach(el => {
+                el.classList.remove('snake')
+            })
+        
+        // removes last game's food 
+        document.querySelectorAll('div.food')
+            .forEach(el => {
+                el.classList.remove('food')
+                el.style.backgroundColor = '#fffcfc'
+            })
+        
+        this.game.scoreCounter.innerText = '0'
 
-        for (let i = 0; i < this.tail.length; i++) {
-            let yX = this.tail[i].split('-');
-
-            let y = yX[0];
-            let x = yX[1];
-
-            this.game.boardCells[y][x].classList.remove('snake')
-        }
         this.tail.length = 0;
         this.tailLength = 6;
         this.direction = 'right';
@@ -359,7 +365,7 @@ class Snake {
 class Food {
 
     constructor(game) {
-        this.game = game
+        this.game = game;
         this.color = `hsl(${Math.floor(Math.random() * 360)},100%,50%)`;
     }
 
