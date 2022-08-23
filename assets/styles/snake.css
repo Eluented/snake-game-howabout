@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap');
 
-html, body {
+html,
+body {
     margin: 0;
     overflow-y: hidden;
     overflow-x: hidden;
@@ -12,7 +13,7 @@ body {
     background-color: #000000;
     color: #fff;
     font-family: 'Oswald', sans-serif;
-    
+
 }
 
 #board {
@@ -24,20 +25,27 @@ body {
     justify-content: center;
     align-items: center;
     gap: 4vw;
-    margin-top: 1.5vh;  
+    margin-top: 1.5vh;
 }
-#controls.playing .play-button, #controls.game-over .play-button {
+
+#controls.playing .play-button,
+#controls.game-over .play-button {
     display: none;
 }
-#controls:not(.playing) .pause-button, #controls:not(.playing) .resume-button {
+
+#controls:not(.playing) .pause-button,
+#controls:not(.playing) .resume-button {
     display: none;
 }
+
 #controls.paused .pause-button {
     display: none;
 }
+
 #controls:not(.paused) .resume-button {
     display: none;
 }
+
 #controls:not(.game-over) .restart-button {
     display: none;
 }
@@ -57,10 +65,12 @@ div.row {
     display: flex;
     flex-direction: row;
 }
+
 div.col {
     flex: 1;
     /* border: 1px solid grey; */
 }
+
 div.col.snake {
     background: #ff4a32 !important;
 }
@@ -80,6 +90,7 @@ div#gameOver {
     padding-top: 100px;
     box-sizing: border-box;
 }
+
 #board.game-over div#gameOver {
     display: block;
 }
@@ -89,7 +100,8 @@ div#gameOver {
 } */
 
 /* cyberpunk button */
-button, button::after {
+button,
+button::after {
     width: 380px;
     height: 86px;
     font-size: 36px;
@@ -102,16 +114,16 @@ button, button::after {
     box-shadow: 6px 0px 0px #00E6F6;
     outline: transparent;
     position: relative;
-  }
-  
-  button::after {
+}
+
+button::after {
     --slice-0: inset(50% 50% 50% 50%);
     --slice-1: inset(80% -6px 0 0);
     --slice-2: inset(50% -6px 30% 0);
     --slice-3: inset(10% -6px 85% 0);
     --slice-4: inset(40% -6px 43% 0);
     --slice-5: inset(80% -6px 5% 0);
-    
+
     content: 'DO NOT FAIL';
     display: block;
     position: absolute;
@@ -119,71 +131,116 @@ button, button::after {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(45deg, transparent 3%, #00E6F6 3%, #00E6F6 5%, #FF013C 5%);
+    background: linear-gradient(45deg, transparent 3%, #00E6F6 3%, #00E6F6 5%, #373435 5%);
     text-shadow: -3px -3px 0px #F8F005, 3px 3px 0px #00E6F6;
     clip-path: var(--slice-0);
-  }
-  
-  button:hover {
+}
+
+button:hover {
     cursor: pointer;
-  }
+}
 
-  .score-button:hover {
+.score-button:hover {
     cursor: auto;
-  }
+}
 
-  .score-button {
+.score-button {
     background: linear-gradient(45deg, transparent 5%, #00E6F6 5%);
     box-shadow: 6px 0px 0px #FF013C;
-  }
-  button:hover::after {
-    animation: 1s glitch;
+}
+
+.set-difficulty {
+    background: linear-gradient(45deg, transparent 5%, #eeb108 5%);
+    box-shadow: 6px 0px 0px rgb(105, 235, 6);
+}
+
+#easy {
+    background: linear-gradient(45deg, transparent 5%, #13c51f 5%);
+    box-shadow: 6px 0px 0px #889b2c;
+}
+
+#medium {
+    background: linear-gradient(45deg, transparent 5%, #1354c5 5%);
+    box-shadow: 6px 0px 0px #4327d1;
+}
+
+#hard {
+    background: linear-gradient(45deg, transparent 5%, #8d13c5 5%);
+    box-shadow: 6px 0px 0px #4a1264;
+}
+
+button:hover::after {
+    animation: 1.5s glitch;
     animation-timing-function: steps(2, end);
-  }
-  
-  @keyframes glitch {
+}
+
+@keyframes glitch {
     0% {
-      clip-path: var(--slice-1);
-      transform: translate(-20px, -10px);
+        clip-path: var(--slice-1);
+        transform: translate(-20px, -10px);
     }
+
     10% {
-      clip-path: var(--slice-3);
-      transform: translate(10px, 10px);
+        clip-path: var(--slice-3);
+        transform: translate(10px, 10px);
     }
+
     20% {
-      clip-path: var(--slice-1);
-      transform: translate(-10px, 10px);
+        clip-path: var(--slice-1);
+        transform: translate(-10px, 10px);
     }
+
     30% {
-      clip-path: var(--slice-3);
-      transform: translate(0px, 5px);
+        clip-path: var(--slice-3);
+        transform: translate(0px, 5px);
     }
+
     40% {
-      clip-path: var(--slice-2);
-      transform: translate(-5px, 0px);
+        clip-path: var(--slice-2);
+        transform: translate(-5px, 0px);
     }
+
     50% {
-      clip-path: var(--slice-3);
-      transform: translate(5px, 0px);
+        clip-path: var(--slice-3);
+        transform: translate(5px, 0px);
     }
+
     60% {
-      clip-path: var(--slice-4);
-      transform: translate(5px, 10px);
+        clip-path: var(--slice-4);
+        transform: translate(5px, 10px);
     }
+
     70% {
-      clip-path: var(--slice-2);
-      transform: translate(-10px, 10px);
+        clip-path: var(--slice-2);
+        transform: translate(-10px, 10px);
     }
+
     80% {
-      clip-path: var(--slice-5);
-      transform: translate(20px, -10px);
+        clip-path: var(--slice-5);
+        transform: translate(20px, -10px);
     }
+
     90% {
-      clip-path: var(--slice-1);
-      transform: translate(-10px, 0px);
+        clip-path: var(--slice-1);
+        transform: translate(-10px, 0px);
     }
+
     100% {
-      clip-path: var(--slice-1);
-      transform: translate(0);
+        clip-path: var(--slice-1);
+        transform: translate(0);
     }
-  }
+}
+
+#bg-modal {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    top: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 1;
+}
+
+

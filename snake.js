@@ -14,7 +14,7 @@ class SnakeGame {
 
         this.board = board;
         this.controls = controls;
-
+        
         this.scoreCounter = document.querySelector('.score');
 
         this.initBoard();
@@ -131,7 +131,25 @@ class SnakeGame {
             })
 
     }
+    
+    /**
+     * Set Difficulty
+     */
+    easy() {
+        this.snake.speed = 160
+        this.snake.incrementSpeed = 2
+    }   
 
+    medium() {
+        this.snake.speed = 125
+        this.snake.incrementSpeed = 3
+    }
+
+    hard() {
+        this.snake.speed = 100
+        this.snake.incrementSpeed = 4
+    }
+    
     /**
      * Begin the game
      */
@@ -196,10 +214,10 @@ class Snake {
     position = [];
     tailLength = 6;
     direction = 'right';
-    speed = 160;
+    speed = null;
+    incrementSpeed = null;
     moving = false;
     movementTimer = null;
-
     constructor(game) {
 
         this.game = game;
@@ -312,7 +330,7 @@ class Snake {
             new Food(this.game).move();
 
             this.game.increaseScore(5);
-            this.speed -= 2;
+            this.speed -= this.incrementSpeed;
         }
 
         // Move another step in `this.speed` number of milliseconds

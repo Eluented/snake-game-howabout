@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap');
 
 :root {
     --panel-width: calc(100% / 6);
@@ -34,7 +34,7 @@ h1 {
 }
 body {
     height: 100vh;
-    font-family: "Montserrat", sans-serif;
+    font-family: 'Oswald', sans-serif;
     color: var(--white);
     overflow: hidden;
 }
