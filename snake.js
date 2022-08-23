@@ -25,24 +25,28 @@ class SnakeGame {
             switch (event.key) {
                 case 'ArrowLeft':
                 case 'a':
-                    this.snake.setDirection('left');
+                    if (this.snake.direction != 'right'){
+                        this.snake.setDirection('left');
+                    }
                     break;
-
                 case 'ArrowUp':
                 case 'w':
-                    this.snake.setDirection('up');
+                    if (this.snake.direction != 'down'){
+                        this.snake.setDirection('up');
+                    }
                     break;
-
                 case 'ArrowRight':
                 case 'd':
-                    this.snake.setDirection('right');
+                    if (this.snake.direction != 'left'){
+                        this.snake.setDirection('right');
+                    }
                     break;
-
                 case 'ArrowDown':
                 case 's':
-                    this.snake.setDirection('down');
+                    if (this.snake.direction != 'up'){
+                        this.snake.setDirection('down');
+                    }
                     break;
-
                 case 'Escape':
                     this.snake.pause();
                     break;
