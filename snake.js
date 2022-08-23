@@ -172,7 +172,7 @@ class SnakeGame {
      * End the game
      */
     async gameOver() {
-        var gameOverAudio = new Audio('./assets/audio/snake-dies-metal-gear.mp3');
+        var gameOverAudio = new Audio(`./assets/audio/snakeGameOver${Math.floor(Math.random() * (1 * 6))}.mp3`);
         gameOverAudio.play();
 
         this.score = 0;
