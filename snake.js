@@ -8,6 +8,7 @@ class SnakeGame {
     boardCells = [];
     score = 0;
     food = null;
+    foodCellColor = null;
 
     constructor(board, controls) {
 
@@ -61,6 +62,7 @@ class SnakeGame {
             const row = document.createElement('div');
             row.classList.add('row');
             row.classList.add('row-' + rowNum);
+
             return row;
         }
         // Generate a new column
@@ -68,6 +70,7 @@ class SnakeGame {
             const col = document.createElement('div');
             col.classList.add('col');
             col.classList.add('col-' + colNum);
+
             return col;
         }
 
@@ -94,23 +97,34 @@ class SnakeGame {
         // adding wall colours
         document.querySelectorAll('div.row-0')
             .forEach(el => {
-                el.style.background = '#B20600'
+                el.style.backgroundColor = 'grey'
             })
 
         document.querySelectorAll('div.col-0')
             .forEach(el => {
-                el.style.background = '#B20600'
+                el.style.backgroundColor = 'grey'
             })
 
         document.querySelectorAll(`div.row-${SnakeGame.NUM_ROWS - 1}`)
             .forEach(el => {
-                el.style.background = '#B20600'
+                el.style.backgroundColor = 'grey'
             })
 
-        document.querySelectorAll(`.col-${SnakeGame.NUM_COLS - 1}`)
+        document.querySelectorAll(`div.col-${SnakeGame.NUM_COLS - 1}`)
             .forEach(el => {
-                el.style.background = '#B20600'
+                el.style.backgroundColor = 'grey'
             })
+
+        document.querySelectorAll(`div.col`)
+            .forEach((el, index) => {
+                if (index % 2 == 0) {
+                    el.style.backgroundColor = '#DBBEA1FF'
+                }
+                else {
+                    el.style.backgroundColor = '#CEAE77'
+                }
+            })
+
     }
 
     /**
@@ -281,7 +295,7 @@ class Snake {
             let foodX = foodCoords[1];
 
             // remove random colour then remove class 
-            document.querySelector('.food').style.backgroundColor = '#fffcfc';
+            document.querySelector('.food').style.backgroundColor = this.game.foodCellColor;
             this.game.boardCells[foodY][foodX].classList.remove('food');
 
             // push the popped tail back into the snake
@@ -340,14 +354,14 @@ class Snake {
             .forEach(el => {
                 el.classList.remove('snake')
             })
-        
+
         // removes last game's food 
         document.querySelectorAll('div.food')
             .forEach(el => {
                 el.classList.remove('food')
                 el.style.backgroundColor = '#fffcfc'
             })
-        
+
         this.game.scoreCounter.innerText = '0'
 
         this.tail.length = 0;
@@ -380,6 +394,11 @@ class Food {
         const foodCell = this.game.boardCells[foodY][foodX];
         this.game.food = foodY + '-' + foodX;
 
+        console.log('this is a food cell', foodCell)
+        // records previous foodCell color
+        this.game.foodCellColor = window.getComputedStyle(foodCell).backgroundColor;
+
+        // this.game.foodCellColor
         foodCell.classList.add('food');
         document.querySelector('.food').style.backgroundColor = this.color;
 

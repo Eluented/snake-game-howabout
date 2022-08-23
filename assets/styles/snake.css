@@ -1,5 +1,7 @@
 html, body {
     margin: 0;
+    overflow-y: hidden;
+    overflow-x: hidden;
 }
 
 body {
@@ -11,9 +13,14 @@ body {
 }
 
 #board {
-    background-color: #fffcfc;
+    background: #A37B73FF;
 }
 
+#controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 #controls.playing .play-button, #controls.game-over .play-button {
     display: none;
 }
@@ -50,7 +57,7 @@ div.col {
     /* border: 1px solid grey; */
 }
 div.col.snake {
-    background: #FF1E00 !important;
+    background: #ff4a32 !important;
 }
 
 div.col.food {
