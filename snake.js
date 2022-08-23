@@ -136,18 +136,18 @@ class SnakeGame {
      * Set Difficulty
      */
     easy() {
-        this.snake.speed = 160
-        this.snake.incrementSpeed = 2
+        this.snake.speed = 140
+        this.snake.incrementSpeed = 1
     }   
 
     medium() {
-        this.snake.speed = 125
-        this.snake.incrementSpeed = 3
+        this.snake.speed = 110
+        this.snake.incrementSpeed = 2
     }
 
     hard() {
-        this.snake.speed = 100
-        this.snake.incrementSpeed = 4
+        this.snake.speed = 60
+        this.snake.incrementSpeed = 3
     }
     
     /**
