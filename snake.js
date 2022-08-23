@@ -15,7 +15,7 @@ class SnakeGame {
         this.board = board;
         this.controls = controls;
 
-        this.scoreCounter = this.controls.querySelector('.score');
+        this.scoreCounter = document.querySelector('.score');
 
         this.initBoard();
 
@@ -94,27 +94,7 @@ class SnakeGame {
 
         }
 
-        // adding wall colours
-        document.querySelectorAll('div.row-0')
-            .forEach(el => {
-                el.style.backgroundColor = 'grey'
-            })
-
-        document.querySelectorAll('div.col-0')
-            .forEach(el => {
-                el.style.backgroundColor = 'grey'
-            })
-
-        document.querySelectorAll(`div.row-${SnakeGame.NUM_ROWS - 1}`)
-            .forEach(el => {
-                el.style.backgroundColor = 'grey'
-            })
-
-        document.querySelectorAll(`div.col-${SnakeGame.NUM_COLS - 1}`)
-            .forEach(el => {
-                el.style.backgroundColor = 'grey'
-            })
-
+        // checkerboard effect
         document.querySelectorAll(`div.col`)
             .forEach((el, index) => {
                 if (index % 2 == 0) {
@@ -123,6 +103,27 @@ class SnakeGame {
                 else {
                     el.style.backgroundColor = '#CEAE77'
                 }
+            })
+
+        // adding wall colours
+        var row0Children = Array.from(document.querySelector('.row-0').children)
+        row0Children.forEach(el => {
+            el.style.backgroundColor = 'grey'
+        })
+
+        var lastRowChildren = Array.from(document.querySelector(`div.row-${SnakeGame.NUM_ROWS - 1}`).children)
+        lastRowChildren.forEach(el => {
+            el.style.backgroundColor = 'grey'
+        })
+
+        document.querySelectorAll('div.col-0')
+            .forEach(el => {
+                el.style.backgroundColor = 'grey'
+            })
+
+        document.querySelectorAll(`div.col-${SnakeGame.NUM_COLS - 1}`)
+            .forEach(el => {
+                el.style.backgroundColor = 'grey'
             })
 
     }
@@ -359,7 +360,7 @@ class Snake {
         document.querySelectorAll('div.food')
             .forEach(el => {
                 el.classList.remove('food')
-                el.style.backgroundColor = '#fffcfc'
+                el.style.backgroundColor = this.game.foodCellColor;
             })
 
         this.game.scoreCounter.innerText = '0'

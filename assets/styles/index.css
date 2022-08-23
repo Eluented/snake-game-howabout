@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
 :root {
     --panel-width: calc(100% / 6);
     --darkblue: #02020c;
@@ -28,6 +30,7 @@ h1 {
     -moz-user-select: -moz-none;
     -khtml-user-select: none;
     -webkit-user-select: none;
+    font-family: 'Roboto', sans-serif;
 }
 body {
     height: 100vh;

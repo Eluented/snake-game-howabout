@@ -20,6 +20,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 4vw;
 }
 #controls.playing .play-button, #controls.game-over .play-button {
     display: none;
