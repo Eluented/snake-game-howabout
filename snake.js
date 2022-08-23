@@ -1,9 +1,8 @@
 class SnakeGame {
 
 
-    static NUM_ROWS = Math.ceil(window.screen.availHeight / 20);
-    static NUM_COLS = Math.ceil(window.screen.availWidth / 20);
-
+    static NUM_ROWS = 2 * (Math.ceil(window.screen.availHeight / 40) / 2);
+    static NUM_COLS = 2 * (Math.ceil(window.screen.availWidth / 40) / 2);
 
     boardCells = [];
     score = 0;
@@ -112,22 +111,22 @@ class SnakeGame {
         // adding wall colours
         var row0Children = Array.from(document.querySelector('.row-0').children)
         row0Children.forEach(el => {
-            el.style.backgroundColor = 'grey'
+            el.style.backgroundColor = '#C04000'
         })
 
         var lastRowChildren = Array.from(document.querySelector(`div.row-${SnakeGame.NUM_ROWS - 1}`).children)
         lastRowChildren.forEach(el => {
-            el.style.backgroundColor = 'grey'
+            el.style.backgroundColor = '#C04000'
         })
 
         document.querySelectorAll('div.col-0')
             .forEach(el => {
-                el.style.backgroundColor = 'grey'
+                el.style.backgroundColor = '#C04000'
             })
 
         document.querySelectorAll(`div.col-${SnakeGame.NUM_COLS - 1}`)
             .forEach(el => {
-                el.style.backgroundColor = 'grey'
+                el.style.backgroundColor = '#C04000'
             })
 
     }
@@ -193,6 +192,7 @@ class SnakeGame {
         const rndInt = Math.floor(Math.random() * 5) + 1
 
         var gameOverAudio = new Audio(`./assets/audio/snakeGameOver${rndInt}.mp3`);
+        gameOverAudio.volume = 0.3
         gameOverAudio.play();
 
         this.score = 0;
@@ -257,7 +257,7 @@ class Snake {
         }
 
         // Todo: add the snake moving logic here and check if the snake hits a wall, itself, or food
-        let lastCellCoordinates = this.tail.pop()
+        let lastCellCoordinates = this.tail.pop();
         let lastCellSplit = lastCellCoordinates.split('-');
 
         let lastY = parseInt(lastCellSplit[0]);
@@ -297,8 +297,7 @@ class Snake {
 
         // check if it hitself
         for (let i = 1; i < this.tail.length; i++) {
-
-            if (this.head === this.tail[i]) {
+            if (newCoordinates === this.tail[i]) {
                 this.game.gameOver();
             }
         }
