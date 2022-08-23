@@ -1,8 +1,8 @@
 class SnakeGame {
 
 
-    static NUM_ROWS = 2 * (Math.ceil(window.screen.availHeight / 40) / 2);
-    static NUM_COLS = 2 * (Math.ceil(window.screen.availWidth / 40) / 2);
+    static NUM_ROWS = 2 * (Math.ceil(window.screen.availHeight / 60)) + 1;
+    static NUM_COLS = 2 * (Math.ceil(window.screen.availWidth / 60)) + 1;
 
     boardCells = [];
     score = 0;
@@ -13,45 +13,73 @@ class SnakeGame {
 
         this.board = board;
         this.controls = controls;
-        
-        this.scoreCounter = document.querySelector('.score');
+
+        this.scoreCounter = document.querySelectorAll('.score');
 
         this.initBoard();
 
         this.snake = new Snake(this);
 
+        var isKeyDown = false;
+        
+        var isPaused = false;
+
         window.addEventListener('keydown', (event) => {
             switch (event.key) {
                 case 'ArrowLeft':
                 case 'a':
-                    if (this.snake.direction != 'right'){
+                    if (this.snake.direction != 'right') {
                         this.snake.setDirection('left');
                     }
                     break;
                 case 'ArrowUp':
                 case 'w':
-                    if (this.snake.direction != 'down'){
+                    if (this.snake.direction != 'down') {
                         this.snake.setDirection('up');
                     }
                     break;
                 case 'ArrowRight':
                 case 'd':
-                    if (this.snake.direction != 'left'){
+                    if (this.snake.direction != 'left') {
                         this.snake.setDirection('right');
                     }
                     break;
                 case 'ArrowDown':
                 case 's':
-                    if (this.snake.direction != 'up'){
+                    if (this.snake.direction != 'up') {
                         this.snake.setDirection('down');
                     }
                     break;
                 case 'Escape':
                     this.snake.pause();
                     break;
-                // add shift case and make snake go faster
+                case ' ':
+                    if (!isPaused) {
+                        this.snake.pause();
+                        isPaused = true;
+                    } else {
+                        this.snake.move();
+                        isPaused = false;
+                    }
+                    break;
+                case 'Shift':
+                    if (!isKeyDown) {
+                        this.snake.shiftSpeed = this.snake.speed / 2
+                        this.snake.speed = this.snake.speed / 2
+                        isKeyDown = true;
+                        console.log(isKeyDown)
+                    }
+                    break;
             }
         });
+        window.addEventListener('keyup', (event) => {
+            switch (event.key) {
+                case 'Shift':
+                    // make it return back into its normal speed
+                    this.snake.speed += this.snake.shiftSpeed
+                    isKeyDown = false;
+            }
+        })
 
     }
 
@@ -130,14 +158,14 @@ class SnakeGame {
             })
 
     }
-    
+
     /**
      * Set Difficulty
      */
     easy() {
         this.snake.speed = 140
         this.snake.incrementSpeed = 1
-    }   
+    }
 
     medium() {
         this.snake.speed = 110
@@ -145,10 +173,10 @@ class SnakeGame {
     }
 
     hard() {
-        this.snake.speed = 60
+        this.snake.speed = 80
         this.snake.incrementSpeed = 3
     }
-    
+
     /**
      * Begin the game
      */
@@ -181,7 +209,9 @@ class SnakeGame {
     increaseScore(amount) {
 
         this.score += amount;
-        this.scoreCounter.innerText = this.score;
+        this.scoreCounter.forEach(el => {
+            el.innerText = this.score
+        })
 
     }
 
@@ -202,6 +232,19 @@ class SnakeGame {
         this.controls.classList.add('game-over');
         this.board.classList.add('game-over');
 
+        // removes last game's food 
+        document.querySelectorAll('div.food')
+            .forEach(el => {
+                el.classList.remove('food')
+            })
+
+        document.querySelectorAll('div.row').forEach(row => {
+            for (let i = 0; i < Array.from(row.children).length; i++) {
+                setTimeout(() => {
+                    Array.from(row.children)[i].style.backgroundColor = '#F00'
+                }, i * 10)
+            }
+        })
     }
 
 }
@@ -218,6 +261,8 @@ class Snake {
     incrementSpeed = null;
     moving = false;
     movementTimer = null;
+    shiftSpeed = 0;
+
     constructor(game) {
 
         this.game = game;
@@ -328,7 +373,7 @@ class Snake {
             // spawn new Food
             new Food(this.game).move();
 
-            this.game.increaseScore(5);
+            this.game.increaseScore(10);
             this.speed -= this.incrementSpeed;
         }
 
@@ -378,11 +423,36 @@ class Snake {
                 el.classList.remove('snake')
             })
 
-        // removes last game's food 
-        document.querySelectorAll('div.food')
+        // checkerboard effect
+        document.querySelectorAll(`div.col`)
+            .forEach((el, index) => {
+                if (index % 2 == 0) {
+                    el.style.backgroundColor = '#DBBEA1FF'
+                }
+                else {
+                    el.style.backgroundColor = '#CEAE77'
+                }
+            })
+
+        // adding wall colours
+        var row0Children = Array.from(document.querySelector('.row-0').children)
+        row0Children.forEach(el => {
+            el.style.backgroundColor = '#C04000'
+        })
+
+        var lastRowChildren = Array.from(document.querySelector(`div.row-${SnakeGame.NUM_ROWS - 1}`).children)
+        lastRowChildren.forEach(el => {
+            el.style.backgroundColor = '#C04000'
+        })
+
+        document.querySelectorAll('div.col-0')
             .forEach(el => {
-                el.classList.remove('food')
-                el.style.backgroundColor = this.game.foodCellColor;
+                el.style.backgroundColor = '#C04000'
+            })
+
+        document.querySelectorAll(`div.col-${SnakeGame.NUM_COLS - 1}`)
+            .forEach(el => {
+                el.style.backgroundColor = '#C04000'
             })
 
         this.game.scoreCounter.innerText = '0'
@@ -411,11 +481,17 @@ class Food {
      */
     move() {
         // Todo: write this
-        const foodX = Math.floor(Math.random() * (SnakeGame.NUM_COLS - Snake.STARTING_EDGE_OFFSET)) + (Snake.STARTING_EDGE_OFFSET / 2);
-        const foodY = Math.floor(Math.random() * (SnakeGame.NUM_ROWS - Snake.STARTING_EDGE_OFFSET)) + (Snake.STARTING_EDGE_OFFSET / 2);
-
-        const foodCell = this.game.boardCells[foodY][foodX];
-        this.game.food = foodY + '-' + foodX;
+        function generateRandomFood(boardCells) {
+            if (boardCells) {
+                const foodX = Math.floor(Math.random() * (SnakeGame.NUM_COLS - Snake.STARTING_EDGE_OFFSET)) + (Snake.STARTING_EDGE_OFFSET / 2);
+                const foodY = Math.floor(Math.random() * (SnakeGame.NUM_ROWS - Snake.STARTING_EDGE_OFFSET)) + (Snake.STARTING_EDGE_OFFSET / 2);
+                console.log(boardCells[foodY][foodX])
+                return (boardCells[foodY][foodX].classList.contains('snake')) ? generateRandomFood(boardCells) : [foodY, foodX];
+            }
+        }
+        const Foodcoordinates = generateRandomFood(this.game.boardCells);
+        this.game.food = Foodcoordinates[0] + '-' + Foodcoordinates[1];
+        const foodCell = this.game.boardCells[Foodcoordinates[0]][Foodcoordinates[1]];
 
         // records previous foodCell color
         this.game.foodCellColor = window.getComputedStyle(foodCell).backgroundColor;

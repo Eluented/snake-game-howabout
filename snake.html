@@ -22,7 +22,7 @@
         <div>
             <button class="play-button" onclick="game.play()">PLAY</button>
             <button class="restart-button" onclick="game.restart()">RESTART</button>
-            <button class="pause-button" onclick="game.snake.pause()">PAUSE</button>
+            <button class="pause-button" onclick="game.snake.pause()">PAUSE (SPACE)</button>
             <button class="resume-button" onclick="game.snake.move()">RESUME</button>
         </div>
         <div>
@@ -38,9 +38,11 @@
     <div id="board">
         <div id="gameOver">
             <h1>Game Over!</h1>
+            <h2>Your Score is <span class="score">0</span></h2>
         </div>
     </div>
 
+    <h4>Movement: <Strong>W A S D</Strong> or <strong>Arrow Keys</strong>, Hold <Strong>Shift</Strong> to Run!, Press <Strong>Space</Strong> to Pause/Play</h4>
 
 
     <script type="text/javascript">
@@ -51,7 +53,6 @@
         // closing - setting difficulty
         let buttonModal = document.querySelector('#bg-modal');
 
-        console.log(document.querySelectorAll('.difficulty'));
 
         document.querySelectorAll('.difficulty').forEach(el => {
             el.addEventListener('click', () => {
