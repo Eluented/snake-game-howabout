@@ -172,7 +172,9 @@ class SnakeGame {
      * End the game
      */
     async gameOver() {
-        var gameOverAudio = new Audio(`./assets/audio/snakeGameOver${Math.floor(Math.random() * (1 * 6))}.mp3`);
+        const rndInt = Math.floor(Math.random() * 5) + 1
+        console.log(rndInt)
+        var gameOverAudio = new Audio(`./assets/audio/snakeGameOver${rndInt}.mp3`);
         gameOverAudio.play();
 
         this.score = 0;
