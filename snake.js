@@ -173,7 +173,7 @@ class SnakeGame {
      */
     async gameOver() {
         const rndInt = Math.floor(Math.random() * 5) + 1
-        console.log(rndInt)
+
         var gameOverAudio = new Audio(`./assets/audio/snakeGameOver${rndInt}.mp3`);
         gameOverAudio.play();
 
@@ -214,7 +214,6 @@ class Snake {
         const y = Math.floor(Math.random() * (SnakeGame.NUM_ROWS - Snake.STARTING_EDGE_OFFSET)) + (Snake.STARTING_EDGE_OFFSET / 2);
         this.head = `${y}-${x}`
         this.tail = [`${y}-${x - 1}`, `${y}-${x - 2}`, `${y}-${x - 3}`, `${y}-${x - 4}`, `${y}-${x - 5}`];
-        console.log(this.position)
 
         const headCell = this.game.boardCells[y][x];
         headCell.classList.add('snake');
@@ -401,11 +400,10 @@ class Food {
         const foodCell = this.game.boardCells[foodY][foodX];
         this.game.food = foodY + '-' + foodX;
 
-        console.log('this is a food cell', foodCell)
         // records previous foodCell color
         this.game.foodCellColor = window.getComputedStyle(foodCell).backgroundColor;
 
-        // this.game.foodCellColor
+        // colours in foodCell
         foodCell.classList.add('food');
         document.querySelector('.food').style.backgroundColor = this.color;
 
