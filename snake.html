@@ -11,14 +11,14 @@
 
 <body>
 
-	<div id="bg-modal1">
+    <div id="bg-modal1">
         <div class="instructions">
             <h2 class="how-to-play">How to Play:</h2>
-                <ul>
-                    <li><strong>W A S D</strong> or <strong>Arrow Keys</strong> to Move</li>
-                    <li>Hold <strong>Shift</strong> to Run!</li>
-                    <li>Hold <strong>Space</strong> to Pause/Play</li>
-                </ul>
+            <ul>
+                <li><strong>W A S D</strong> or <strong>Arrow Keys</strong> to Move</li>
+                <li>Hold <strong>Shift</strong> to Run!</li>
+                <li>Hold <strong>Space</strong> to Pause/Play</li>
+            </ul>
         </div>
 
         <div class="difficulty-buttons">
@@ -30,6 +30,16 @@
 
     <div id="bg-modal2">
         <div class="container">
+            <h1>
+                <span class="icon">🎉</span>
+                Flex Your <span class="score">0</span> Score to the Leaderboard!
+                <span class="icon">🎉</span>
+            </h1>
+
+            <form id="searchForm" onsubmit="event.preventDefault();">
+                <input id="searchInput" type="text" class="form-control" placeholder="Search for gifs Chad"
+                    aria-label="Recipient's username" aria-describedby="button-addon2">
+            </form>
         </div>
     </div>
 
@@ -64,16 +74,6 @@
         const controls = document.getElementById('controls');
         const game = new SnakeGame(board, controls);
 
-        // closing - setting difficulty
-        let buttonModal = document.querySelector('#bg-modal1');
-
-
-        document.querySelectorAll('.difficulty').forEach(el => {
-            el.addEventListener('click', () => {
-                buttonModal.style.display = 'none';
-            })
-        })
-
         // opening - setting difficulty
         let setDifficultyBtn = document.querySelector('.set-difficulty');
 
@@ -81,6 +81,23 @@
             buttonModal.style.display = 'flex';
         })
 
+        // closing - setting difficulty
+        let difficultyModal = document.querySelector('#bg-modal1');
+
+
+        document.querySelectorAll('.difficulty').forEach(el => {
+            el.addEventListener('click', () => {
+                difficultyModal.style.display = 'none';
+            })
+        })
+
+        // submit score modal
+        let submitScoreModal = document.querySelector('#bg-modal2');
+        let submitScoreBtn = document.querySelector('#submit-score-button');
+
+        submitScoreBtn.addEventListener('click', () => {
+            submitScoreModal.style.display = 'flex';
+        })
     </script>
 
 </body>
