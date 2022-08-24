@@ -21,7 +21,7 @@ class SnakeGame {
         this.snake = new Snake(this);
 
         var isKeyDown = false;
-        
+
         var isPaused = false;
 
         window.addEventListener('keydown', (event) => {
@@ -54,9 +54,14 @@ class SnakeGame {
                     this.snake.pause();
                     break;
                 case ' ':
-                    if (!isPaused) {
+                    // sees if its paused and game has already started
+                    if (!isPaused && this.controls.classList.length > 0) {
                         this.snake.pause();
                         isPaused = true;
+                    }
+                    // sees if user picked difficulty and the game has NOT started already
+                    if (this.controls.classList.length === 0 && this.snake.speed != null) {
+                        this.play();
                     }
                     break;
                 case 'Shift':
@@ -64,7 +69,6 @@ class SnakeGame {
                         this.snake.shiftSpeed = this.snake.speed / 2
                         this.snake.speed = this.snake.speed / 2
                         isKeyDown = true;
-                        console.log(isKeyDown)
                     }
                     break;
             }
@@ -72,15 +76,17 @@ class SnakeGame {
         window.addEventListener('keyup', (event) => {
             switch (event.key) {
                 case 'Shift':
-                    // make it return back into its normal speed
+                    // make it return back into its normal speed when released
                     this.snake.speed += this.snake.shiftSpeed
                     isKeyDown = false;
                     break;
                 case ' ':
-                    this.snake.move();
-                    isPaused = false;
+                    // sees if it is paused and the user does not have gameover to move
+                    if (this.controls.classList.contains('paused') && !this.controls.classList.contains('game-over')) {
+                        this.snake.move();
+                        isPaused = false;
+                    }
                     break;
-
             }
         })
 
@@ -230,7 +236,7 @@ class SnakeGame {
 
         this.score = 0;
         this.snake.pause();
-        // send user data to api
+
         this.controls.classList.remove('playing');
         this.controls.classList.add('game-over');
         this.board.classList.add('game-over');
@@ -456,7 +462,7 @@ class Snake {
             .forEach(el => {
                 el.style.backgroundColor = '#C04000'
             })
-        
+
         // resets score
         this.game.scoreCounter.forEach(el => {
             el.innerText = 0
