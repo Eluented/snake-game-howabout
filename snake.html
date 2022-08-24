@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>Snake</title>
     <script src="snake.js"></script>
-    <link rel="stylesheet" href="./assets/styles/snake.css">
+    <link rel="stylesheet" href="./assets/styles/global.css">
     <link rel="icon" type="image/x-icon" href="./assets/images/snake.ico">
 </head>
 
@@ -135,14 +135,18 @@
                 };
 
                 const response = await fetch("https://snake.howbout.app/api/onur/high-scores", options);
-                console.log(response);
-                
+
+                let htmlResponse = document.querySelector('.response')
+
+                response.status === 201 ? 
+                htmlResponse.innerText = 'Successfully Sent to the Leaderboard - Click Leaderboard to See!' 
+                : htmlResponse.innerText = 'Error Storing Your Score in the Leaderboard - Please try again'
+
             } catch (err) {
                 console.log(err);
                 document.querySelector('.response').innerText = err
             }
         }
-
     </script>
 
 </body>

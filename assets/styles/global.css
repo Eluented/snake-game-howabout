@@ -344,3 +344,7 @@ button:hover::after {
 .icon {
     font-size: 1.2em;
 }
+.response {
+    text-align: center;
+    font-size: 1.5em;
+}
