@@ -11,7 +11,7 @@
 
 <body>
 
-	<div id="bg-modal">
+	<div id="bg-modal1">
         <div class="instructions">
             <h2 class="how-to-play">How to Play:</h2>
                 <ul>
@@ -28,6 +28,10 @@
         </div>
     </div>
 
+    <div id="bg-modal2">
+        <div class="container">
+        </div>
+    </div>
 
     <div id="controls">
         <div>
@@ -61,7 +65,7 @@
         const game = new SnakeGame(board, controls);
 
         // closing - setting difficulty
-        let buttonModal = document.querySelector('#bg-modal');
+        let buttonModal = document.querySelector('#bg-modal1');
 
 
         document.querySelectorAll('.difficulty').forEach(el => {
