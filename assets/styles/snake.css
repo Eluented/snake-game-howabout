@@ -298,7 +298,7 @@ button:hover::after {
 
 .container {
     width: 40vw;
-	height: 50vh;
+	height: 30vh;
     padding: 30px 50px;
 	background-color: #FEFBF6;
 	border-radius: 5px;
@@ -308,20 +308,22 @@ button:hover::after {
 	position: relative;
     top:0;
     left:0;
-    text-align: center;
 }
 
 .container h1 {
     margin: 0;
-    font-size: calc(2em + 0.5vw);
+    text-align: center;
+    border-bottom-style: solid;
+    border-bottom-color: lightgrey;
 }
 
-#searchInput {
-	min-width: 90%;
+#username {
+	width: 90%;
 	height: 46px;
 	border-radius: 30px;
 	padding-left: 20px;
 	border: 1px solid rgb(118, 118, 118);
+    margin-top: 1vh;
 }
 
 
@@ -332,13 +334,13 @@ button:hover::after {
 }
 
 #searchForm{
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: space-around;
-	min-width: 100%;
+    margin-top: 2vh;
 }
 
+.container button {
+    margin-top: 4vh;
+    margin: auto;
+}
 .icon {
     font-size: 1.2em;
 }

@@ -36,10 +36,13 @@
                 <span class="icon">🎉</span>
             </h1>
 
-            <form id="searchForm" onsubmit="event.preventDefault();">
-                <input id="searchInput" type="text" class="form-control" placeholder="Search for gifs Chad"
-                    aria-label="Recipient's username" aria-describedby="button-addon2">
+            <form id="searchForm">
+                <label for="username"> Username </label>
+                <input id="username" type="text" class="form-control" placeholder="Enter Username"
+                    aria-label="Users's username" name="username">
             </form>
+
+            <button type="submit" form="searchForm" value="Submit">Submit</button>
         </div>
     </div>
 
@@ -68,20 +71,22 @@
         </div>
     </div>
 
+    <h4 class="response"></h4>
+
 
     <script type="text/javascript">
         const board = document.getElementById('board');
         const controls = document.getElementById('controls');
         const game = new SnakeGame(board, controls);
 
-        // opening - setting difficulty
+        // Opening - Setting Difficulty
         let setDifficultyBtn = document.querySelector('.set-difficulty');
 
         setDifficultyBtn.addEventListener('click', () => {
             buttonModal.style.display = 'flex';
         })
 
-        // closing - setting difficulty
+        // Closing - Setting Difficulty
         let difficultyModal = document.querySelector('#bg-modal1');
 
 
@@ -91,13 +96,53 @@
             })
         })
 
-        // submit score modal
+        // Submit Score Modal
         let submitScoreModal = document.querySelector('#bg-modal2');
         let submitScoreBtn = document.querySelector('#submit-score-button');
 
         submitScoreBtn.addEventListener('click', () => {
             submitScoreModal.style.display = 'flex';
         })
+
+        // Leaderboard Submit Form
+        let form = document.getElementById("searchForm")
+
+        form.addEventListener("submit", e => {
+            e.preventDefault();
+
+            const username = e.target.username.value
+            const score = document.querySelector('.score').innerText
+
+
+            postUsername(username, score);
+
+            submitScoreModal.style.display = 'none';
+
+        })
+
+        // Form POST Funtion
+        async function postUsername(username, score) {
+            try {
+                const userDetails = {
+                    name: username,
+                    score: score
+                };
+
+                const options = {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(userDetails),
+                };
+
+                const response = await fetch("https://snake.howbout.app/api/onur/high-scores", options);
+                console.log(response);
+                
+            } catch (err) {
+                console.log(err);
+                document.querySelector('.response').innerText = err
+            }
+        }
+
     </script>
 
 </body>
