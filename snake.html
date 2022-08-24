@@ -12,9 +12,20 @@
 <body>
 
 	<div id="bg-modal">
-        <button id="easy" class="difficulty" onclick="game.easy()">EASY</button>
-        <button id="medium" class="difficulty" onclick="game.medium()">MEDIUM</button>
-        <button id="hard" class="difficulty" onclick="game.hard()">HARD</button>
+        <div class="instructions">
+            <h2 class="how-to-play">How to Play:</h2>
+                <ul>
+                    <li><strong>W A S D</strong> or <strong>Arrow Keys</strong> to Move</li>
+                    <li>Hold <strong>Shift</strong> to Run!</li>
+                    <li>Press <strong>Space</strong> to Pause/Play</li>
+                </ul>
+        </div>
+
+        <div class="difficulty-buttons">
+            <button id="easy" class="difficulty" onclick="game.easy()">EASY</button>
+            <button id="medium" class="difficulty" onclick="game.medium()">MEDIUM</button>
+            <button id="hard" class="difficulty" onclick="game.hard()">HARD</button>
+        </div>
     </div>
 
 
@@ -41,8 +52,6 @@
             <h2>Your Score is <span class="score">0</span></h2>
         </div>
     </div>
-
-    <h4>Movement: <Strong>W A S D</Strong> or <strong>Arrow Keys</strong>, Hold <Strong>Shift</Strong> to Run!, Press <Strong>Space</Strong> to Pause/Play</h4>
 
 
     <script type="text/javascript">

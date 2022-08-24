@@ -57,9 +57,6 @@ class SnakeGame {
                     if (!isPaused) {
                         this.snake.pause();
                         isPaused = true;
-                    } else {
-                        this.snake.move();
-                        isPaused = false;
                     }
                     break;
                 case 'Shift':
@@ -78,6 +75,12 @@ class SnakeGame {
                     // make it return back into its normal speed
                     this.snake.speed += this.snake.shiftSpeed
                     isKeyDown = false;
+                    break;
+                case ' ':
+                    this.snake.move();
+                    isPaused = false;
+                    break;
+
             }
         })
 
@@ -294,7 +297,6 @@ class Snake {
      * Move the snake
      */
     move(direction) {
-
         // If this is the first move, make sure the game isn't paused
         if (!this.moving) {
             this.moving = true;
@@ -454,8 +456,11 @@ class Snake {
             .forEach(el => {
                 el.style.backgroundColor = '#C04000'
             })
-
-        this.game.scoreCounter.innerText = '0'
+        
+        // resets score
+        this.game.scoreCounter.forEach(el => {
+            el.innerText = 0
+        })
 
         this.tail.length = 0;
         this.tailLength = 6;
@@ -485,7 +490,6 @@ class Food {
             if (boardCells) {
                 const foodX = Math.floor(Math.random() * (SnakeGame.NUM_COLS - Snake.STARTING_EDGE_OFFSET)) + (Snake.STARTING_EDGE_OFFSET / 2);
                 const foodY = Math.floor(Math.random() * (SnakeGame.NUM_ROWS - Snake.STARTING_EDGE_OFFSET)) + (Snake.STARTING_EDGE_OFFSET / 2);
-                console.log(boardCells[foodY][foodX])
                 return (boardCells[foodY][foodX].classList.contains('snake')) ? generateRandomFood(boardCells) : [foodY, foodX];
             }
         }
