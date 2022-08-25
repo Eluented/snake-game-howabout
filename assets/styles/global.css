@@ -403,7 +403,8 @@ tbody .username {
 
 .rank,
 .username,
-.score {
+.score,
+.date {
     text-align: center;
 }
 
