@@ -19,14 +19,16 @@ Check out the Netlify deployment [here](https://snake-game-howabout-onur.netlify
 - Debugging most of the bugs that I found 
 - Styling the board with cool effects 
 - Adding additional features
+- Randomised MGS Snake death audio plays when you die (between 1 to 5)
 
 ### Challenges
 - Understanding the source code and not altering it too much
 - Many bugs being introduced when I added additional features - such as holding space to pause and holding shift to speed up
 - Time - I was working part-time at my father's place
 - Making the game controls work on mobile screens 
+- Fixing the bug where if you go up and the opposite direction you instantly die (still couldn't figure it out)
 
 ## Future Features
-- Countdown Timer to get to the next food on Hard difficulty
+- Countdown timer to get to the next food on Hard difficulty
 - Making the game controls work on mobile screens
 - Multiplayer mode with websockets
