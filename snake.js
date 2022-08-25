@@ -13,34 +13,31 @@ class SnakeGame {
 
         this.board = board;
         this.controls = controls;
-
         this.scoreCounter = document.querySelectorAll('.score');
 
         this.initBoard();
 
         this.snake = new Snake(this);
-
         var isKeyDown = false;
-
         var isPaused = false;
 
         window.addEventListener('keydown', (event) => {
             switch (event.key) {
                 case 'ArrowLeft':
                 case 'a':
-                    if (this.snake.direction != 'right') {
+                    if (this.snake.direction !== 'right') {
                         this.snake.setDirection('left');
                     }
                     break;
                 case 'ArrowUp':
                 case 'w':
-                    if (this.snake.direction != 'down') {
+                    if (this.snake.direction !== 'down') {
                         this.snake.setDirection('up');
                     }
                     break;
                 case 'ArrowRight':
                 case 'd':
-                    if (this.snake.direction != 'left') {
+                    if (this.snake.direction !== 'left') {
                         this.snake.setDirection('right');
                     }
                     break;
@@ -259,7 +256,6 @@ class SnakeGame {
 }
 
 class Snake {
-
     static STARTING_EDGE_OFFSET = 20;
     head = null;
     tail = [];
@@ -381,7 +377,7 @@ class Snake {
             // spawn new Food
             new Food(this.game).move();
 
-            this.game.increaseScore(10);
+            this.game.increaseScore(1);
             this.speed -= this.incrementSpeed;
         }
 

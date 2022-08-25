@@ -47,27 +47,29 @@
     </div>
 
     <div id="controls">
+        <button class="set-difficulty">SET DIFFICULTY</button>
+
         <div>
             <button class="play-button" onclick="game.play()">PLAY</button>
             <button class="restart-button" onclick="game.restart()">RESTART</button>
             <button class="pause-button" onclick="game.snake.pause()">PAUSE (SPACE)</button>
             <button class="resume-button" onclick="game.snake.move()">RESUME</button>
         </div>
-        <div>
-            <button class="score-button">
-                SCORE: <span class="score">0</span>
-            </button>
-        </div>
-        <div>
-            <button class="set-difficulty">SET DIFFICULTY</button>
-        </div>
+
+        <button class="score-button">
+            SCORE: <span class="score">0</span>
+        </button>
+
+
+
+        <button class="leaderboard-btn">LEADERBOARD</button>
     </div>
 
     <div id="board">
         <div id="gameOver">
             <h1 class="game-over-text">Game Over!</h1>
             <h2 class="game-over-text">Your Score is <span class="score">0</span></h2>
-            <button id="submit-score-button">Submit Score!</button>
+            <button id="submit-score-button">SUBMIT SCORE</button>
         </div>
     </div>
 
@@ -79,13 +81,6 @@
         const controls = document.getElementById('controls');
         const game = new SnakeGame(board, controls);
 
-        // Opening - Setting Difficulty
-        let setDifficultyBtn = document.querySelector('.set-difficulty');
-
-        setDifficultyBtn.addEventListener('click', () => {
-            buttonModal.style.display = 'flex';
-        })
-
         // Closing - Setting Difficulty
         let difficultyModal = document.querySelector('#bg-modal1');
 
@@ -94,6 +89,20 @@
             el.addEventListener('click', () => {
                 difficultyModal.style.display = 'none';
             })
+        })
+
+        // Opening - Setting Difficulty
+        let setDifficultyBtn = document.querySelector('.set-difficulty');
+
+        setDifficultyBtn.addEventListener('click', () => {
+            difficultyModal.style.display = 'flex';
+        })
+
+        // Leaderboard Button
+        let leaderboardBtn = document.querySelector('.leaderboard-btn');
+
+        leaderboardBtn.addEventListener('click', () => {
+            window.location.href = 'leaderboard.html';
         })
 
         // Submit Score Modal
@@ -138,9 +147,9 @@
 
                 let htmlResponse = document.querySelector('.response')
 
-                response.status === 201 ? 
-                htmlResponse.innerText = 'Successfully Sent to the Leaderboard - Click Leaderboard to See!' 
-                : htmlResponse.innerText = 'Error Storing Your Score in the Leaderboard - Please try again'
+                response.status === 201 ?
+                    htmlResponse.innerText = 'Successfully Sent to the Leaderboard - Click Leaderboard to See!'
+                    : htmlResponse.innerText = 'Error Storing Your Score in the Leaderboard - Please try again'
 
             } catch (err) {
                 console.log(err);

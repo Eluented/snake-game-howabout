@@ -162,6 +162,11 @@ button:hover {
     box-shadow: 6px 0px 0px rgb(105, 235, 6);
 }
 
+.leaderboard-btn {
+    background: linear-gradient(45deg, transparent 5%, #0845EE 5%);
+    box-shadow: 6px 0px 0px rgb(1, 35, 144);
+}
+
 #easy {
     background: linear-gradient(45deg, transparent 5%, #13c51f 5%);
     box-shadow: 6px 0px 0px #889b2c;
@@ -182,6 +187,7 @@ button:hover {
     font-size: 1.5em;
     margin-top: 2vh;
 }
+
 button:hover::after {
     animation: 1.5s glitch;
     animation-timing-function: steps(2, end);
@@ -292,22 +298,22 @@ button:hover::after {
     position: absolute;
     z-index: 1;
     justify-content: center;
-	align-items: center;
+    align-items: center;
     color: black;
 }
 
 .container {
     width: 40vw;
-	height: 30vh;
+    height: 30vh;
     padding: 30px 50px;
-	background-color: #FEFBF6;
-	border-radius: 5px;
-	z-index: 1;
-	display: flex;
-	flex-direction: column;
-	position: relative;
-    top:0;
-    left:0;
+    background-color: #FEFBF6;
+    border-radius: 5px;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    top: 0;
+    left: 0;
 }
 
 .container h1 {
@@ -318,22 +324,21 @@ button:hover::after {
 }
 
 #username {
-	width: 90%;
-	height: 46px;
-	border-radius: 30px;
-	padding-left: 20px;
-	border: 1px solid rgb(118, 118, 118);
+    width: 90%;
+    height: 46px;
+    border-radius: 30px;
+    padding-left: 20px;
+    border: 1px solid rgb(118, 118, 118);
     margin-top: 1vh;
 }
 
-
 .close {
-	margin-left: 0.5vw;
-	transform: rotate(45deg);
-	font-size: 2vw;
+    margin-left: 0.5vw;
+    transform: rotate(45deg);
+    font-size: 2vw;
 }
 
-#searchForm{
+#searchForm {
     margin-top: 2vh;
 }
 
@@ -341,10 +346,79 @@ button:hover::after {
     margin-top: 4vh;
     margin: auto;
 }
+
 .icon {
     font-size: 1.2em;
 }
+
 .response {
     text-align: center;
     font-size: 1.5em;
+}
+
+/* Leaderboard css*/
+.title {
+    text-align: center;
+    font-weight: 600;
+    font-size: 4rem;
+    background-color: #FF7500;
+    margin: 0;
+    margin-bottom: 4vh;
+    padding: 0;
+}
+
+.leaderboard-table {
+    max-width: 50rem;
+    margin: auto;
+    border-radius: 8px;
+    border: 1px solid white;
+}
+
+.table-title {
+    background-color: #DF362D;
+    font-size: 3em;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+table {
+    width: 100%;
+}
+
+thead {
+    font-size: 1.5em;
+    color: rgb(154, 154, 154);
+    background-color: #1f232c;
+    margin: auto;
+    padding-bottom: 40px;
+
+}
+
+tbody .username {
+    font-weight: 500;
+}
+
+.rank,
+.username,
+.score {
+    text-align: center;
+}
+
+.rank {
+    color: rgb(154, 154, 154);
+}
+
+th {
+    padding: 1rem 1rem 0;
+}
+
+tbody {
+    background-color: #0d0f12;
+}
+
+tbody tr:nth-child(2n) {
+    background-color: #1f232c;
 }
