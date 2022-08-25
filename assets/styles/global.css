@@ -3,8 +3,6 @@
 html,
 body {
     margin: 0;
-    overflow-y: hidden;
-    overflow-x: hidden;
 }
 
 body {
@@ -13,7 +11,7 @@ body {
     background-color: #000000;
     color: #fff;
     font-family: 'Oswald', sans-serif;
-
+    overflow: hidden;
 }
 
 #board {
@@ -430,4 +428,10 @@ tbody {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.scrolling {
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
 }
