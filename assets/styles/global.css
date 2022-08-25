@@ -414,12 +414,20 @@ tbody .username {
 
 th {
     padding: 1rem 1rem 0;
+    font-size: 1.23em;
+}
+
+td {
+    font-size: 1.5em;
 }
 
 tbody {
     background-color: #0d0f12;
 }
 
-tbody tr:nth-child(2n) {
-    background-color: #1f232c;
+.go-back {
+    margin-top: 6vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

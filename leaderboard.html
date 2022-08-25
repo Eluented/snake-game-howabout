@@ -20,35 +20,20 @@
             <h1 class="table-title">LEADERBOARD</h1>
             <div class="blur"></div>
         </header>
-        <table>
+        <table class="leaderboard">
             <thead>
                 <th class="rank"></th>
                 <th class="username">USERNAME</th>
                 <th class="score">SCORE</th>
-                <th class="Date">Date</th>
+                <th class="date">Date</th>
             </thead>
-            <tbody>
-                <tr>
-                    <td class="rank">1</td>
-                    <td class="username">Onur</td>
-                    <td class="score">220</td>
-                    <td class="date">25/08/22</td>
-                </tr>
-                <tr>
-                    <td class="rank">1</td>
-                    <td class="username">Onur</td>
-                    <td class="score">220</td>
-                    <td class="date">25/08/22</td>
-                </tr>
-                <tr>
-                    <td class="rank">1</td>
-                    <td class="username">Onur</td>
-                    <td class="score">220</td>
-                    <td class="date">25/08/22</td>
-                </tr>
-            </tbody>
         </table>
     </div>
+
+    <div class="go-back">
+        <button class="go-back-btn">GO BACK</button>
+    </div>
+
     <script type="text/javascript">
         // Fetch All Users in Leaderboard
         async function getAllUsers() {
@@ -67,20 +52,57 @@
         }
 
         // Sort Data by Score
-
-        async function sortDataByScore() {
+        async function getAndSortDataByScore() {
             const data = await getAllUsers();
-            console.log(data)
 
             data.sort((a, b) => {
-                console.log(a.score, b.score)
                 return b.score - a.score
             })
-            console.log(data)
+
             return data
         }
 
-        sortDataByScore();
+        // format date into DD-MM-YYYY 
+        const formatDate = (date) => {
+            let d = new Date(date);
+            let month = (d.getMonth() + 1).toString();
+            let day = d.getDate().toString();
+            let year = d.getFullYear();
+            if (month.length < 2) {
+                month = '0' + month;
+            }
+            if (day.length < 2) {
+                day = '0' + day;
+            }
+            return [day, month, year].join('-');
+        }
+
+        // Render Data into Leaderboard Table
+        async function renderLeaderboard() {
+            const data = await getAndSortDataByScore();
+            const table = document.querySelector('.leaderboard');
+
+            for (let i = 0; i < data.length; i++) {
+                let row = `<tr>
+                                <td class="rank">${i + 1}</td>
+                                <td class="username">${data[i].name}</td>
+                                <td class="score">${data[i].score}</td>
+                                <td class="date">${formatDate(data[i].created_at)}</td>
+                            </tr>`
+
+                table.innerHTML += row
+            }
+        }
+
+        renderLeaderboard();
+
+        // Go Back Button
+        let goBackBtn = document.querySelector('.go-back-btn');
+
+        goBackBtn.addEventListener('click', () => {
+            window.location.href = 'snake.html';
+        })
+        
     </script>
 </body>
 
