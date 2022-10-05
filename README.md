@@ -1,14 +1,15 @@
-# 🐍 Howbout Snake Challenge 🐍
+# 🐍 Vanilla HTML/CSS/JS Snake Game 🐍
 [![Netlify Status](https://api.netlify.com/api/v1/badges/33f220be-33ad-485f-aa89-04ee04511335/deploy-status)](https://app.netlify.com/sites/snake-game-howabout-onur/deploys)
 
 ## Deployed Link
 Check out the Netlify deployment [here](https://snake-game-howabout-onur.netlify.app/)
 
 ## Technologies:
-* GSAP Animations for index page
 * HTML
 * CSS 
 * Javascript
+* Laravel
+* PHP
 
 ## Wins & Challenges
 
@@ -22,9 +23,7 @@ Check out the Netlify deployment [here](https://snake-game-howabout-onur.netlify
 - Randomised MGS Snake death audio plays when you die (between 1 to 5)
 
 ### Challenges
-- Understanding the source code and not altering it too much
 - Many bugs being introduced when I added additional features - such as holding space to pause and holding shift to speed up
-- Time - I was working part-time at my father's place
 - Making the game controls work on mobile screens 
 - Fixing the bug where if you go up and the opposite direction you instantly die (still couldn't figure it out)
 
