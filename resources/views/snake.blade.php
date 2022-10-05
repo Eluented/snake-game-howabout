@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="UTF-8">
     <title>Snake</title>
-    <script src="snake.js"></script>
-    <link rel="stylesheet" href="./assets/styles/global.css">
-    <link rel="icon" type="image/x-icon" href="./assets/images/snake.ico">
+    <script src="{{url('js/snake.js')}}"></script>
+    <link rel="stylesheet" href="{{url('css/app.css')}}">
+    <link rel="icon" type="image/x-icon" href="{{url('images/snake.ico')}}">
 </head>
 
 <body>
@@ -102,7 +101,7 @@
         let leaderboardBtn = document.querySelector('.leaderboard-btn');
 
         leaderboardBtn.addEventListener('click', () => {
-            window.location.href = 'leaderboard.html';
+            window.location.href = 'leaderboard';
         })
 
         // Submit Score Modal
@@ -157,7 +156,4 @@
             }
         }
     </script>
-
-</body>
-
 </html>

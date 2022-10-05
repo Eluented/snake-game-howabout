@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap');
+
+:root {
+    --panel-width: calc(100% / 6);
+    --darkblue: #02020c;
+    --white: #fff;
+    --lightgray: #fafafb;
+}
+ 
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+ 
+ul {
+    list-style: none;
+}
+ 
+a {
+    color: inherit;
+    text-decoration: none;
+}
+ 
+h1 {
+    font-size: 3rem;
+}
+
+.hacker-text {
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    font-family: 'Montserrat', sans-serif
+}
+body {
+    height: 100vh;
+    font-family: 'Oswald', sans-serif;
+    color: var(--white);
+    overflow: hidden;
+}
+
+.panels {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    width: 180vw;
+    height: 100%;
+    transform: translateX(-50%) skewX(-35deg);
+    clip-path: circle(100%);
+    z-index: 1;
+    background: var(--lightgray);
+}
+ 
+.panels .panel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: var(--panel-width);
+    transform: scaleY(0);
+    transform-origin: top;
+    background: var(--darkblue);
+}
+ 
+.panels .panel:nth-child(even) {
+    transform-origin: bottom;
+}
+ 
+.panels .panel:nth-child(2) {
+    left: calc(var(--panel-width) - 1px);
+}
+ 
+.panels .panel:nth-child(3) {
+    left: calc(calc(var(--panel-width) * 2) - 2px);
+}
+ 
+.panels .panel:nth-child(4) {
+    left: calc(calc(var(--panel-width) * 3) - 4px);
+}
+ 
+.panels .panel:nth-child(5) {
+    left: calc(calc(var(--panel-width) * 4) - 5px);
+}
+ 
+.panels .panel:nth-child(6) {
+    left: calc(calc(var(--panel-width) * 5) - 6px);
+}
+ 
+.page-main {
+    display: flex;
+    height: 100%;
+    padding: 100px 15px;
+    clip-path: circle(20%);
+    overflow-y: auto;
+    background: var(--darkblue);
+}
+ 
+.page-main > div {
+    text-align: center;
+    margin: auto;
+}
+ 
+@media (max-width: 1024px) {
+    .panels {
+        width: 200vw;
+    }
+}
+ 
+@media screen and (max-width: 600px) {
+    .panels {
+        width: 235vw;
+    }
+}

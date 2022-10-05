@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
-    <link rel="stylesheet" href="./assets/styles/index.css">
-    <link rel="icon" type="image/x-icon" href="./assets/images/snake.ico">
+    <link rel="stylesheet" href="{{url('css/index.css')}}">
+    <link rel="icon" type="image/x-icon" href="{{url('images/snake.ico')}}">
     <script src="https://unpkg.co/gsap@3/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/baffle@0.3.6/dist/baffle.min.js"></script>
     <title>Snake Game!</title>
@@ -25,7 +24,7 @@
 
     <main class="page-main">
         <div>
-            <h1 class="hacker-text">HOWBOUT... A GAME OF SNAKE?</h1>
+            <h1 class="hacker-text">LET'S PLAY A GAME OF SNAKE...</h1>
         </div>
     </main>
 
@@ -74,8 +73,7 @@
         });
 
         // timer to change 
-        setTimeout(() => window.location.href = 'snake.html', 6000)
+        setTimeout(() => window.location.href = 'snake-game', 6000)
     </script>
 </body>
-
 </html>

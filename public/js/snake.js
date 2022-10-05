@@ -192,8 +192,7 @@ class SnakeGame {
         this.moving = true
         this.snake.move();
         new Food(this).move();
-
-        var playAudio = new Audio('./assets/audio/mlg-airhorn.mp3');
+        var playAudio = new Audio('../audio/mlg-airhorn.mp3');
         playAudio.play();
     }
 
@@ -227,8 +226,8 @@ class SnakeGame {
     async gameOver() {
         const rndInt = Math.floor(Math.random() * 5) + 1
 
-        var gameOverAudio = new Audio(`./assets/audio/snakeGameOver${rndInt}.mp3`);
-        gameOverAudio.volume = 0.3
+        var gameOverAudio = new Audio(`../audio/snakeGameOver${rndInt}.mp3`);
+        gameOverAudio.volume = 0.3;
         gameOverAudio.play();
 
         this.score = 0;
@@ -358,7 +357,7 @@ class Snake {
 
         //  checks if it eats food
         if (this.head === this.game.food) {
-            var foodAudio = new Audio('./assets/audio/food.mp3');
+            var foodAudio = new Audio('../audio/food.mp3');
             foodAudio.play();
 
             let foodCoords = this.game.food.split('-');
