@@ -6,9 +6,8 @@
 
         <title>Leaderboard</title>
 
-        <link rel="icon" type="image/x-icon" href="{{url('images/snake.ico')}}">
-        <!-- Styles -->
-        <link rel="stylesheet" href="{{url('css/app.css')}}">
+        <link rel="stylesheet" href="css/app.css">
+        <link rel="icon" type="image/x-icon" href="images/snake.ico">
     </head>
     <body>
 

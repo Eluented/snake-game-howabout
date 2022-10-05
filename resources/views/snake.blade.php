@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Snake</title>
-    <script src="{{url('js/snake.js')}}"></script>
-    <link rel="stylesheet" href="{{url('css/app.css')}}">
-    <link rel="icon" type="image/x-icon" href="{{url('images/snake.ico')}}">
+    <script src="js/snake.js"></script>
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="icon" type="image/x-icon" href="images/snake.ico">
 </head>
 
 <body>
