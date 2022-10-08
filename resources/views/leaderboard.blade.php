@@ -26,25 +26,26 @@
                         <th class="rank"></th>
                         <th class="username">USERNAME</th>
                         <th class="score">SCORE</th>
-                        <th class="date">Date</th>
+                        <th class="difficulty">DIFFICULTY</th>
+                        <th class="date">DATE</th>
                     </thead>
 
                     <?php 
                       $rank = 1;
                     ?>
                     @foreach ($users as $user)
+                        <?php $date = new DateTime($user->created_at)?>
                         <tbody>
                             <tr>
                                 <td class="rank">{{$rank}}</td>
                                 <td class="username">{{$user->name}}</td>
                                 <td class="score">{{$user->score}}</td>
-                                <td class="date">{{date_format($user->created_at, "d/m/Y")}}</td>
+                                <td class="difficulty">{{$user->difficulty}}</td>
+                                <td class="date">{{date_format($date, "d/m/Y")}}</td>
                             </tr>
                         </tbody>
 
-                        <?php 
-                        $rank += 1; 
-                        ?>
+                        <?php $rank += 1; ?>
                     @endforeach
                 </table>
             </div>

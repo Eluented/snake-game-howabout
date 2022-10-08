@@ -8,6 +8,7 @@ class SnakeGame {
     score = 0;
     food = null;
     foodCellColor = null;
+    difficulty = null;
 
     constructor(board, controls) {
 
@@ -169,18 +170,21 @@ class SnakeGame {
      * Set Difficulty
      */
     easy() {
-        this.snake.speed = 140
-        this.snake.incrementSpeed = 1
+        this.snake.speed = 110;
+        this.snake.incrementSpeed = 1;
+        this.difficulty = "easy";
     }
 
     medium() {
-        this.snake.speed = 110
-        this.snake.incrementSpeed = 2
+        this.snake.speed = 90;
+        this.snake.incrementSpeed = 2;
+        this.difficulty = "medium";
     }
 
     hard() {
-        this.snake.speed = 80
-        this.snake.incrementSpeed = 3
+        this.snake.speed = 70;
+        this.snake.incrementSpeed = 3;
+        this.difficulty = "hard";
     }
 
     /**
@@ -376,7 +380,18 @@ class Snake {
             // spawn new Food
             new Food(this.game).move();
 
-            this.game.increaseScore(1);
+            if (this.game.difficulty === "easy") {
+                this.game.increaseScore(1);
+            }
+            
+            if (this.game.difficulty === "medium") {
+                this.game.increaseScore(2);
+            }
+
+            if (this.game.difficulty === "hard") {
+                this.game.increaseScore(3);
+            }
+
             this.speed -= this.incrementSpeed;
         }
 

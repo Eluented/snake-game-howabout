@@ -402,7 +402,8 @@ tbody .username {
 .rank,
 .username,
 .score,
-.date {
+.date,
+.difficulty {
     text-align: center;
 }
 
@@ -435,3 +436,13 @@ tbody {
     height: 100%;
     overflow-y: scroll;
 }
+
+.close {
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin-left: 0.6vw;
+	transform: rotate(45deg);
+	font-size: 2vw;
+    cursor: pointer;
+  }

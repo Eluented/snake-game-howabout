@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('score');
+            $table->string('difficulty');
             $table->timestamp('created_at');
-            $table->string('password');
         });
     }
 

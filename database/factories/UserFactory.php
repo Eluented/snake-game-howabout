@@ -20,6 +20,7 @@ class UserFactory extends Factory
         return [
             'name' => fake()->name(),
             'score' => fake()->score(),
+            'difficulty' => fake()->difficulty(),
             'created_at' => now(),
         ];
     }

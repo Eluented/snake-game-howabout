@@ -17,5 +17,5 @@ use App\Http\Controllers\UsersController;
 Route::get('/', function () {
     return view('snake');
 });
-
+Route::post('/', [UsersController::class, 'store']);
 Route::get('/leaderboard', [UsersController::class, 'index']);

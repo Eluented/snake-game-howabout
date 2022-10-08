@@ -29,16 +29,20 @@
 
     <div id="bg-modal2">
         <div class="container">
+            <span class="close">+</span>
             <h1>
                 <span class="icon">🎉</span>
                 Flex Your <span class="score">0</span> Score to the Leaderboard!
                 <span class="icon">🎉</span>
             </h1>
 
-            <form id="searchForm">
+            <form id="searchForm" action="/" method="POST">
+                @csrf
                 <label for="username"> Username </label>
                 <input id="username" type="text" class="form-control" placeholder="Enter Username"
-                    aria-label="Users's username" name="username">
+                    aria-label="Users's username" name="username"/>
+                <input id="score" type="hidden" name="score" value="0" /> 
+                <input id="difficulty" type="hidden" name="difficulty" value="NULL" /> 
             </form>
 
             <button type="submit" form="searchForm" value="Submit">Submit</button>
@@ -116,19 +120,23 @@
         let form = document.getElementById("searchForm")
 
         form.addEventListener("submit", e => {
-            e.preventDefault();
+            // setting score
+            const score = document.querySelector('.score').innerText;
+            
+            document.getElementById("score").value = score;
 
-            const username = e.target.username.value
-            const score = document.querySelector('.score').innerText
+            // setting difficulty 
+            let difficulty = game.difficulty.toUpperCase();
 
+            document.getElementById("difficulty").value = difficulty;
 
-            postUsername(username, score);
+            // postUsername(username, score);
 
-            submitScoreModal.style.display = 'none';
+            // submitScoreModal.style.display = 'none';
 
         })
 
-        // Form POST Funtion
+        /* Form POST Funtion
         async function postUsername(username, score) {
             try {
                 const userDetails = {
@@ -155,5 +163,11 @@
                 document.querySelector('.response').innerText = err
             }
         }
+        */
+
+        // Closing modal button
+        document.querySelector('.close').addEventListener('click', () => {
+            submitScoreModal.style.display = 'none';
+        })
     </script>
 </html>
